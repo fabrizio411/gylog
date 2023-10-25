@@ -35,6 +35,9 @@ type User = {
         distance: 'metric' | 'imperial',
     },
     isPremium: boolean,
+    routines: string[], // user routines Ids
+    workouts: string[], // user workouts Ids
+    measures: string[], // user measures Ids
     createdAt: string
 }
 ```

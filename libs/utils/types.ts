@@ -17,6 +17,9 @@ export type TypeUser = {
     image?: string,
     units: TypeUnits,
     isPremium: boolean,
+    routines: string[],
+    workouts: string[],
+    measures: string[],
     createdAt: string,
     updatedAt: string
 }

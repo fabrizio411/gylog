@@ -9,7 +9,10 @@ const userSchema = new mongoose.Schema({
         weight: { type: String, enum: ['kg', 'lbs'], default: 'kg' },
         distance: { type: String, enum: ['metric', 'imperial'], default: 'metric' },
     },
-    isPremium: { type: Boolean, required: true, default: false }
+    isPremium: { type: Boolean, required: true, default: false },
+    routines: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Routine' }],
+    workouts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Workout' }],
+    measures: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Measure' }],
 }, {
     timestamps: true
 })
