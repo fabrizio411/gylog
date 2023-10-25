@@ -8,6 +8,9 @@
 - TypeScript
 - MongoDb
 
+## Librerias
+- Mongoose: para conectar con base de datos.
+
 ## Concepto
 - Se establecera un modelo de version gratuita y version premium.
 - Aplicacion para llevar registro de rutinas ejercicios y entrenamientos.
