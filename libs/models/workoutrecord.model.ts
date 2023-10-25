@@ -3,7 +3,7 @@ import { unitsArray } from '../utils/constants'
 
 const workoutrecordSchema = new mongoose.Schema({
     note: { type: String },
-    exercises: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Exercise' }],
+    exercise: { type: mongoose.Schema.Types.ObjectId, ref: 'Exercise' },
     dataOne: { type: Number, required: true },
     unitOne: { type: String, required: true, enum: unitsArray },
     dataTwo: { type: Number, },

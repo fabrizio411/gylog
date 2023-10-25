@@ -1,7 +1,6 @@
 import mongoose from 'mongoose'
 
 const programSchema = new mongoose.Schema({
-    name: { type: String, required: true },
     week: {
         mon: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Routine' }],
         tue: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Routine' }],
