@@ -15,6 +15,7 @@
 - Se establecera un modelo de version gratuita y version premium.
 - Aplicacion para llevar registro de rutinas ejercicios y entrenamientos.
 - Enfocado en llevar un control de repeticiones y pesos de los ejercicios.
+- Controlar RPE y RIR, (pagina para explicar este contenido)
 - Registro de peso corporal.
 - Con rutinas y ejercicios personalizados por los usuarios.
 - Mostrando datos con distintos analisis y graficos de los mismos, ya sean datos de rutinas o ejercicios en particular. Incluso ejercicios dentro de determinada rutina solamente.
@@ -31,9 +32,10 @@ type User = {
     image: string,
     units: {
         weight: 'kg' | 'lbs',
-        distance: 'kilometers' | 'miles',
-        measures: 'cm' | 'in'
-    }
+        distance: 'metric' | 'imperial',
+    },
+    isPremium: boolean,
+    createdAt: string
 }
 ```
 
@@ -59,9 +61,10 @@ type User = {
 type Ejercicio = {
     _id: string,
     name: string,
-    type: 'reps' | 'reps/weight' | 'dur' | 'dur/weight' | 'dist' | 'dist/dur',
+    variant: 'reps' | 'reps/weight' | 'dur' | 'dur/weight' | 'dist' | 'dist/dur',
     muscle: 'forearm' | 'biceps' | 'triceps' | 'shoulder' | 'traps' | 'chest' | 'lats' | 'lower back' | 'abs' | 'quadricep' | 'hamstrings' | 'adductors' | 'abductor' | 'glutes' | 'calves' |  'other',
-    user?: string
+    user?: string,
+    createdAt: string
 }
 ```
 
@@ -86,14 +89,13 @@ type Rutina = {
     note?: string,
     exercies: [
         {
-            exerciseId: string,
+            exercise: string,
             sets: number,
             note?: string
         }
     ],
     user?: string,
-    createdAt: string,
-    updatedAt: string
+    createdAt: string
 }
 ```
 
@@ -127,7 +129,8 @@ type Program = {
 type Measure = {
     _id: string,
     name: string,
-    unit: string,
+    toMeasure: string,
+    useUnit: 'kg' | 'g' | 'mg' | 'lbs' | 'km' | 'm' | 'cm' | 'mm' | 'mi' | 'ft' | 'in' | '%'
     user: string
 }
 ```
@@ -137,6 +140,7 @@ type MeasureRecord = {
     _id: string,
     measure: string // measure Id
     value: number,
+    unit: 'kg' | 'g' | 'mg' | 'lbs' | 'km' | 'm' | 'cm' | 'mm' | 'mi' | 'ft' | 'in' | '%'
     date: stirng,
     user: string,
 }
@@ -146,6 +150,7 @@ type MeasureRecord = {
 - El registro de entrenamientos esta compuesto de un registro de la informacion del entrenamiento, y otro registro con la informacion de cada ejercicio.
 - De esta forma se tendra mejor acceso a la informacion de los entrenamientos y de cada ejercicio por separado.
 - Los ejercicios registrara una data principal y secundaria, en caso de que el tipo de ejercicio no tenga data secundaria, esta valdra 0.
+- Version Premium: se puede habilitar la opcion para trackear RPE y RIR (del 1 al 10 ambos).
 - Estructura de datos del entrenamiento:
 ```typescript
 type Workout = {
@@ -159,12 +164,16 @@ type Workout = {
 ```
 - Estructura de datos de los registros de ejercicios:
 ```typescript
-type ExerciseRecord = {
+type WorkoutRecord = {
     _id: string,
     note: string,
     exercise: string, // exercise Id
     dataOne: number,
+    unitOne: 'kg' | 'g' | 'mg' | 'lbs' | 'km' | 'm' | 'cm' | 'mm' | 'mi' | 'ft' | 'in' | '%',
     dataTwo: number,
+    unitTwo: 'kg' | 'g' | 'mg' | 'lbs' | 'km' | 'm' | 'cm' | 'mm' | 'mi' | 'ft' | 'in' | '%',
+    rpe?: number,
+    rir?: number,
     workout: string, // workoutId
     routine: string, // routineId
     user: string
@@ -177,3 +186,4 @@ type ExerciseRecord = {
 - 5 ejercicios personalizados / Ejercicios personalizados ilimitados.
 - 5 rutinas / Rutinas ilimitadas.
 - Medida solo de peso corporal / Crear medidas personalizadas.
+- Track de reps y peso / Tambien track de RIR y RPE.
