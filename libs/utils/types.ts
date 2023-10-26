@@ -5,9 +5,9 @@ export type TypeUnits = {
     distance: 'metric' | 'imperial'
 }
 
-export type TypeExerciseVariants = 'reps' | 'reps/weight' | 'dur' | 'dur/weight' | 'dist' | 'dist/dur'
+export type TypeExerciseCategory = 'reps' | 'reps/weight' | 'dur' | 'dur/weight' | 'dist' | 'dist/dur' | 'checkbox'
 
-export type TypeMuscles = 'forearm' | 'biceps' | 'triceps' | 'shoulder' | 'traps' | 'chest' | 'lats' | 'lower back' | 'abs' | 'quadricep' | 'hamstrings' | 'adductors' | 'abductor' | 'glutes' | 'calves' |  'other'
+export type TypeMuscles = 'forearm' | 'biceps' | 'triceps' | 'shoulder' | 'traps' | 'chest' | 'lats' | 'lower back' | 'abs' | 'quadricep' | 'hamstrings' | 'adductors' | 'abductor' | 'glutes' | 'calves' | 'cardio' | 'other'
 
 export type TypeUser = {
     _id: string | any,
@@ -18,8 +18,11 @@ export type TypeUser = {
     units: TypeUnits,
     isPremium: boolean,
     routines: string[],
+    exercises: string[],
+    favourites: string[],
     workouts: string[],
     measures: string[],
+    program: string,
     createdAt: string,
     updatedAt: string
 }
@@ -35,7 +38,8 @@ export type TypeUserGeneral = {
 export type TypeExercise = {
     _id: string | any,
     name: string,
-    variant: TypeExerciseVariants,
+    note?: string,
+    variant: TypeExerciseCategory,
     muscle: TypeMuscles,
     user?: string | TypeUserGeneral | TypeUser,
     createdAt: string,
@@ -77,7 +81,7 @@ export type TypeWorkout = {
     _id: string | any,
     note?: string,
     routine: string | TypeRoutine,
-    records: string[] | TypeWorkoutRecord,
+    records: string[] | TypeWorkoutRecord[],
     user: string | TypeUserGeneral | TypeUser,
     createdAt: string,
     updatedAt: string
@@ -103,6 +107,7 @@ export type TypeMeasure = {
     name: string,
     toMeasure: 'weight' | 'length' | 'percentage',
     useUnit: TypeUnits,
+    records: string[] | TypeMeasureRecord[],
     user: string | TypeUserGeneral | TypeUser,
 }
 

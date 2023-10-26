@@ -11,8 +11,11 @@ const userSchema = new mongoose.Schema({
     },
     isPremium: { type: Boolean, required: true, default: false },
     routines: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Routine' }],
+    exercises: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Exercise' }],
+    favourites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Exercise' }],
     workouts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Workout' }],
     measures: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Measure' }],
+    program: { type: mongoose.Schema.Types.ObjectId, ref: 'Program' },
 }, {
     timestamps: true
 })
