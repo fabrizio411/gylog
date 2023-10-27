@@ -4,17 +4,9 @@ import { revalidatePath } from "next/cache";
 import Exercise from "../models/exercise.model";
 import User from "../models/user.model";
 import { TypeExerciseCategory, TypeMuscles } from "../utils/types";
-import { connect } from "http2";
 import { connectDB } from "../mongoose";
 import Routine from "../models/routine.model";
 
-type ExerciseInfo = {
-    name: string,
-    note?: string,
-    category: TypeExerciseCategory,
-    muscle: TypeMuscles,
-    userId: string
-}
 
 export async function exerciseCreate({
     name,
@@ -22,7 +14,13 @@ export async function exerciseCreate({
     category,
     muscle,
     userId
-}: ExerciseInfo) {
+}: {
+    name: string,
+    note?: string,
+    category: TypeExerciseCategory,
+    muscle: TypeMuscles,
+    userId: string
+}) {
     try {
         // Verificar informacion valida
         if (!name || !category || !muscle || !userId) {
@@ -97,3 +95,41 @@ export async function exerciseDelete({
     }
 }
 
+export async function exerciseUpdate({
+    name,
+    note,
+    category,
+    muscle,
+    userId,
+    exerciseId
+}: {
+    name: string,
+    note?: string,
+    category: TypeExerciseCategory,
+    muscle: TypeMuscles,
+    userId: string,
+    exerciseId: string
+}) {
+    try {
+        // Verificar informacion valida
+        if (!name || !category || !muscle || !userId) {
+            throw new Error('Missing info')
+        }
+
+        // Update Exercise
+        await Exercise.findByIdAndUpdate(
+            exerciseId,
+            {
+                name,
+                note,
+                category,
+                muscle,
+            }
+        ).where({ user: userId })
+
+        revalidatePath('/exercises')
+
+    } catch (error: any) {
+        throw new Error(`EXERCISE_UPDATE_ERROR: ${error.message}`)
+    }
+}

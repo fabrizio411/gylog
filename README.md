@@ -283,6 +283,10 @@ type WorkoutRecord = {
     - Eliminar id del ejercicio de User.
     - Eliminar el ejercicio de las rutinas actuales del usuario.
     - Revalidate path (/exercises)
+- [exerciseUpdate()](./libs/actions/exercise.actions.ts):
+    - Verificar informacion valida.
+    - Update del ejercicio.
+    - Revalidate path (/exercises)
 
 ### Rutina
 - Crear rutina: (max de 5 para usuarios gratis)
