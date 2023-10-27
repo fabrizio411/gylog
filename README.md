@@ -1,5 +1,8 @@
 # Documentación
 
+## TODO
+- [exerciseDelete()](./libs/actions/exercise.actions.ts): sin terminar
+
 ## Roadmap
 - Redactar las ideas del concepto de la aplicacion.
 - Pensar y documentar las estructuras de datos.
@@ -269,6 +272,17 @@ type WorkoutRecord = {
     - Se eliminara el Id del ejercicio del campo exercises del usuario.
 - Editar ejercicio: 
     - Solo se podra editar el nombre del ejercicio, para mantener los datos como estan.
+#### Funciones:
+- [exerciseCreate()](./libs/actions/exercise.actions.ts):
+    - Verificar informacion valida.
+    - Crear ejercicio.
+    - Agregar id del ejercicio al usuario.
+    - Revalidate path (/exercises)
+- [exerciseDelete()](./libs/actions/exercise.actions.ts):
+    - Eliminar ejercicio.
+    - Eliminar id del ejercicio de User.
+    - Eliminar el ejercicio de las rutinas actuales del usuario.
+    - Revalidate path (/exercises)
 
 ### Rutina
 - Crear rutina: (max de 5 para usuarios gratis)

@@ -45,7 +45,7 @@ export type TypeExercise = {
     _id: string | any,
     name: string,
     note?: string,
-    variant: TypeExerciseCategory,
+    category: TypeExerciseCategory,
     muscle: TypeMuscles,
     user?: string | TypeUserGeneral | TypeUser,
     createdAt: string,

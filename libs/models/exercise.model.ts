@@ -4,7 +4,7 @@ import { exerciseCategoryArray, musclesArray } from '../utils/constants'
 const exerciseSchema = new mongoose.Schema({
     name: { type: String, required: true },
     note: { type: String },
-    caregory: { type: String, required: true, enum: exerciseCategoryArray },
+    category: { type: String, required: true, enum: exerciseCategoryArray },
     muscle: { type: String, required: true, enum: musclesArray },
     favouriteBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
