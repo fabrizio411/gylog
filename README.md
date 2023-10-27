@@ -40,6 +40,8 @@
 
 ## Librerias
 - Mongoose: para conectar con base de datos.
+- Bcrypt: encriptacion de password. Y comparacion para login.
+- Zod: validaciones de formularios.
 
 ## Concepto
 - Se establecera un modelo de version gratuita y version premium.
@@ -232,6 +234,7 @@ type WorkoutRecord = {
 ## Funcionalidades
 ### Usuario
 - Registrarse:
+    - Validacion con Zod.
     - Email, nomrbre de usuario y contraceña: Campos requeridos.
     - Imagen: se podra agregar un archivo de imagen en el formulario de registro.
     - Se verificara dianmicamente que el email y el nombre de usuario esten disponibles.
@@ -244,6 +247,13 @@ type WorkoutRecord = {
 - Login: 
     - Se hara login con la funcion signin de Next Auth, tomando el email y la contraceña.
     - Dentro de la configuracion de Next Auth se comparara la contraceña con la encriptada usando Bcrypt.
+#### Funciones:
+- [userRegister()](./libs/actions/auth.actions.ts):
+    - Verificar disponibilidad de email y username.
+    - Encriptar password.
+    - Crear nuevo User.
+    - Crear nuevo Program.
+
 
 ### Ejercicio
 - Crear ejercicio: (max de 5 para usuarios gratis)
@@ -328,6 +338,14 @@ type WorkoutRecord = {
 - Eliminar un registro de measure: 
     - Al elimina el MeasureRecords completo.
     - No afecta nada mas.
+
+### Compartir contenido
+- Se debe poder acceder al link de una rutina o de un ejercicio creado por otra persona.
+- No se podra acceder a ningun otro tipo de dato.
+- Al acceder aparecera una opcion para guardar esa template en tu base de datos.
+- Esto se debe controlar en la funcion de obtener los datos de la rutina o el ejercicio.
+
+### Estadisticas
 
 
 
