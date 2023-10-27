@@ -1,9 +1,14 @@
 import mongoose from "mongoose"
 
-export type TypeUnits = {
+export type TypeUnitsConfig = {
     weight: 'kg' | 'lbs',
-    distance: 'metric' | 'imperial'
+    distance: 'metric' | 'imperial',
+    size: 'metric' | 'imperial'
 }
+
+export type TypeUnits = 'kg' | 'g' | 'mg' | 'lbs' | 'km' | 'm' | 'cm' | 'mm' | 'mi' | 'ft' | 'in' | '%' | 'kcal'
+
+export type TypeDays = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday'
 
 export type TypeExerciseCategory = 'reps' | 'reps/weight' | 'dur' | 'dur/weight' | 'dist' | 'dist/dur' | 'checkbox'
 
@@ -15,8 +20,9 @@ export type TypeUser = {
     email: string,
     password: string,
     image?: string,
-    units: TypeUnits,
+    units: TypeUnitsConfig,
     isPremium: boolean,
+    firstWeekDay: 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday',
     routines: string[],
     exercises: string[],
     favourites: string[],
@@ -31,7 +37,7 @@ export type TypeUserGeneral = {
     _id: string | any,
     username: string,
     image?: string,
-    units: TypeUnits,
+    units: TypeUnitsConfig,
     isPremium: boolean
 }
 
@@ -105,7 +111,7 @@ export type TypeWorkoutRecord = {
 export type TypeMeasure = {
     _id: string | any,
     name: string,
-    toMeasure: 'weight' | 'length' | 'percentage',
+    toMeasure: 'weight' | 'length' | 'percentage' | 'calories',
     useUnit: TypeUnits,
     records: string[] | TypeMeasureRecord[],
     user: string | TypeUserGeneral | TypeUser,

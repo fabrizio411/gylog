@@ -55,6 +55,7 @@
 
 ### User 
 - Se llevara cuenta de las unidades seleccionadas por el usuario y se usasran luego para generar los datos que las necesiten.
+- Se guardara el primer dia de la semana del usuario, para mostrar el programa
 - Estructua de datos del usuario:
 ```typescript
 type User = {
@@ -66,6 +67,7 @@ type User = {
     units: {
         weight: 'kg' | 'lbs',
         distance: 'metric' | 'imperial',
+        size: 'metric' | 'imperial'
     },
     isPremium: boolean,
     routines: string[], // user routines Ids
@@ -174,8 +176,8 @@ type Program = {
 type Measure = {
     _id: string,
     name: string,
-    toMeasure: string,
-    useUnit: 'kg' | 'g' | 'mg' | 'lbs' | 'km' | 'm' | 'cm' | 'mm' | 'mi' | 'ft' | 'in' | '%',
+    toMeasure: 'weight'| 'length'| 'percentage'| 'calories',
+    useUnit: 'kg' | 'g' | 'mg' | 'lbs' | 'km' | 'm' | 'cm' | 'mm' | 'mi' | 'ft' | 'in' | '%' | 'kcal',
     records: string[], // measureRecords Ids
     user: string
 }
@@ -186,7 +188,7 @@ type MeasureRecord = {
     _id: string,
     measure: string // measure Id
     value: number,
-    unit: 'kg' | 'g' | 'mg' | 'lbs' | 'km' | 'm' | 'cm' | 'mm' | 'mi' | 'ft' | 'in' | '%'
+    unit: 'kg' | 'g' | 'mg' | 'lbs' | 'km' | 'm' | 'cm' | 'mm' | 'mi' | 'ft' | 'in' | '%' | 'kcal',
     date: stirng,
     user: string,
 }

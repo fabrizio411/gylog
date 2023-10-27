@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import { daysArray } from '../utils/constants'
 
 const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
@@ -8,8 +9,11 @@ const userSchema = new mongoose.Schema({
     units: {
         weight: { type: String, enum: ['kg', 'lbs'], default: 'kg' },
         distance: { type: String, enum: ['metric', 'imperial'], default: 'metric' },
+        size: { type: String, enum: ['metric', 'imperial'], default: 'metric' },
+
     },
     isPremium: { type: Boolean, required: true, default: false },
+    firstWeekDay: { type: String, enum: daysArray, default: 'monday' },
     routines: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Routine' }],
     exercises: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Exercise' }],
     favourites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Exercise' }],
