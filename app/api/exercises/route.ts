@@ -2,16 +2,36 @@ import Exercise from '@/libs/models/exercise.model'
 import Routine from '@/libs/models/routine.model'
 import User from '@/libs/models/user.model'
 import { connectDB } from '@/libs/mongoose'
-import { TypeExercise, TypeExerciseCategory, TypeMuscles } from '@/libs/utils/types'
+import getUser from '@/libs/utils/getUser'
+import { TypeExercise, TypeExerciseCategory, TypeMuscles, TypeUser } from '@/libs/utils/types'
 import { NextResponse } from 'next/server'
+
+export async function GET() {
+    try {
+        const user: Partial<TypeUser> = await getUser()
+
+        // Obtiene los ejercicios del usuario o los que no tienen usuario asigando (generales)
+        const exercises = await Exercise.find({
+            user: {
+                $in: [null, undefined, user._id]
+            }
+        })
+
+        return NextResponse.json(exercises)
+
+    } catch (error) {
+        console.log('GETEXERCISES_ERROR', error)
+        return new NextResponse('Internal Error', { status: 500 })
+    }
+}
 
 export async function POST(req: Request) {
     const {
         name,
         note, 
         category, 
-        muscle, 
-        userId 
+        muscle,
+        userId
     }: {
         name: string,
         note: string,
@@ -21,12 +41,20 @@ export async function POST(req: Request) {
     } = await req.json()
 
     // Verificar informacion valida
-    if (!name || !category || !muscle || !userId) {
+    if (!name || !category || !muscle) {
         return NextResponse.json({ message: 'Missing info' })
     }
 
     try {
         connectDB()
+
+        const user = await User.findById(userId)
+        .select('isPremium exercises')
+
+        // Verificar si es usuario grtis y si puede crear mas ejercicios
+        if (!user.isPremium && user.exercises.length >= 5) {
+            return NextResponse.json({ message: 'Max exercises created', error: true })
+        }
 
         // Crear Exercise
         const newExercise: TypeExercise = await Exercise.create({
@@ -47,96 +75,6 @@ export async function POST(req: Request) {
         
     } catch (error) {
         console.log('CREATE_EXERCISE_ERROR', error)
-        return new NextResponse('Internal Error', { status: 500 })
-    }
-}
-
-export async function DELETE(req: Request) {
-    const {
-        userId,
-        exerciseId
-    }: {
-        userId: string,
-        exerciseId: string
-    } = await req.json()
-
-    try {
-        connectDB()
-
-        // Eliminar ejercicio solo si el usuario es el creador.
-        const deletedExercise = await Exercise.findByIdAndDelete(
-            exerciseId,
-            { new: true }
-        ).where({ user: userId })
-        
-        if (!deletedExercise) {
-            return NextResponse.json({ message: 'Error deleting exercise', error: true })
-        }
-
-        // Eliminar id del ejercicio del User
-        await User.findByIdAndUpdate(
-            userId,
-            { $pull: { exercises: exerciseId } }
-        )
-
-        // Eliminar ejercicio de las rutinas actuales
-        const routines = await Routine.find({ 
-            'exercises.exercise': exerciseId,
-            user: userId 
-        }).select('_id')
-
-        for (let i = 0; i < routines.length; i++) {
-            await Routine.findByIdAndUpdate(
-                routines[i]._id,
-                { $pull: { exercises: { exercise: exerciseId } } }
-            )
-        }
-
-        return NextResponse.json({ message: 'Exercise deleted' })
-        
-    } catch (error) {
-        console.log('DELETE_EXERCISE_ERROR', error)
-        return new NextResponse('Internal Error', { status: 500 })
-    }
-}
-
-export async function PUT(req: Request) {
-    const {
-        name,
-        note, 
-        category, 
-        muscle, 
-        userId,
-        exerciseId
-    }: {
-        name: string,
-        note: string,
-        category: TypeExerciseCategory,
-        muscle: TypeMuscles,
-        userId: string,
-        exerciseId: string
-    } = await req.json()
-
-    if (!name || !category || !muscle || !userId || !exerciseId) {
-        return NextResponse.json({ message: 'Missing info' })
-    }
-
-    try {
-        connectDB()
-
-        // Update Exercise
-        await Exercise.findByIdAndUpdate(
-            exerciseId,
-            {
-                name,
-                note,
-                category,
-                muscle,
-            }
-        ).where({ user: userId })
-        
-    } catch (error) {
-        console.log('UPDATE_EXERCISE_ERROR', error)
         return new NextResponse('Internal Error', { status: 500 })
     }
 }

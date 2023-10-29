@@ -275,19 +275,23 @@ type WorkoutRecord = {
 - Editar ejercicio: 
     - Solo se podra editar el nombre del ejercicio, para mantener los datos como estan.
 #### API:
+- [/api/exercises - GET](./app/api/exercises/route.ts):
+    - Obtener infomacion del usuario.
+    - Obtener los ejericicios generales y los creados por el usuario.
 - [/api/exercises - POST](./app/api/exercises/route.ts):
     - Parametros: name, note, category, muscle, userId.
     - Verificar informacion valida.
+    - Verificar usuario grais si puede crear ejercicios.
     - Crear ejercicio.
     - Agregar id del ejercicio al usuario.
     - Revalidate path (/exercises)
-- [/api/exercises - DELETE](./app/api/exercises/route.ts):
+- [/api/exercises/[id] - DELETE](./app/api/exercises/[id]/route.ts):
     - Parametros: userId, exerciseId.
     - Eliminar ejercicio.
     - Eliminar id del ejercicio de User.
     - Eliminar el ejercicio de las rutinas actuales del usuario.
     - Revalidate path (/exercises)
-- [/api/exercises - PUT](./app/api/exercises/route.ts):
+- [/api/exercises/[id] - PUT](./app/api/exercises/[id]/route.ts):
     - Parametros: name, note, category, muscle, userId, exerciseId.
     - Verificar informacion valida.
     - Update del ejercicio.
