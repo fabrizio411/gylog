@@ -1,13 +1,14 @@
 import Exercise from '@/libs/models/exercise.model'
-import Routine from '@/libs/models/routine.model'
 import User from '@/libs/models/user.model'
-import { connectDB } from '@/libs/mongoose'
 import getUser from '@/libs/utils/getUser'
+import { connectDB } from '@/libs/mongoose'
 import { TypeExercise, TypeExerciseCategory, TypeMuscles, TypeUser } from '@/libs/utils/types'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
     try {
+        connectDB()
+        
         const user: Partial<TypeUser> = await getUser()
 
         // Obtiene los ejercicios del usuario o los que no tienen usuario asigando (generales)

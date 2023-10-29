@@ -1,9 +1,9 @@
-import Exercise from "@/libs/models/exercise.model"
-import Routine from "@/libs/models/routine.model"
-import User from "@/libs/models/user.model"
-import { connectDB } from "@/libs/mongoose"
-import { TypeExerciseCategory, TypeMuscles } from "@/libs/utils/types"
-import { NextResponse } from "next/server"
+import Exercise from '@/libs/models/exercise.model'
+import Routine from '@/libs/models/routine.model'
+import User from '@/libs/models/user.model'
+import { connectDB } from '@/libs/mongoose'
+import { TypeExerciseCategory, TypeMuscles } from '@/libs/utils/types'
+import { NextResponse } from 'next/server'
 
 export async function GET(
     { params }: { 
@@ -11,6 +11,8 @@ export async function GET(
     }
 ) {
     try {
+        connectDB()
+
         const exercise = await Exercise.findById(params.id)
 
         if (!exercise) {
@@ -33,11 +35,7 @@ export async function DELETE(
     try {
         connectDB()
 
-        // Eliminar ejercicio solo si el usuario es el creador.
-        const deletedExercise = await Exercise.findByIdAndDelete(
-            params.id,
-            { new: true }
-        )
+        const deletedExercise = await Exercise.findByIdAndDelete(params.id)
 
         if (!deletedExercise) {
             return NextResponse.json({ message: 'Error deleting exercise', error: true })
