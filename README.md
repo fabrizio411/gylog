@@ -297,6 +297,10 @@ type WorkoutRecord = {
     - Parametros: name, note, category, muscle, userId, exerciseId.
     - Verificar informacion valida.
     - Update del ejercicio.
+- [/api/exercises/fav/[id]](./app/api/exercises/fav/[id]/route.ts)
+    - Encontrar ejercicio con id de params.
+    - Eliminar de favoritos en caso de ya estar.
+    - Agregarlo a favoritos en caso contrario.
 
 ### Rutina
 - Crear rutina: (max de 5 para usuarios gratis)
@@ -356,7 +360,7 @@ type WorkoutRecord = {
     - En este tambien se guardara la rutina de la que parte y el usuario que lo relaciona.
     - Se guardara el Id del Workout en el campo workouts del usuario.
 #### API:
-- [/api/workout/[id]](./app/api/workout/[id]/route.ts):
+- [/api/workout/[id] - POST](./app/api/workout/[id]/route.ts):
     - Parametros: note, records data, userId.
     - Crear instancia del documento workout.
     - Crear un WorkoutRecord para cada elemento de records data.
@@ -373,8 +377,20 @@ type WorkoutRecord = {
     - Aparecera el mismo furmulario para crear un Workout, pero con los datos del mismo cargados.
     - Se guardara de la misma manera que es creado.
     - Se deben hacer updates de todos los records asociados. O de los que recibieron cambios (si es posible).
-
-
+#### API:
+- [/api/records - GET](./app/api/records/route.ts):
+    - Obtener informacion de los workouts del usuario.
+- [/api/records - GET](./app/api/records/[id]/route.ts):
+    - Obtener informacion de un workout.
+- [/api/records - DELETE](./app/api/records/[id]/route.ts):
+    - Borrar el workout.
+    - Eliminar el id del workout del User.
+    - Borrar todos los documentos de WorkoutRecords asociados al workout.
+- [/api/records - PUT](./app/api/records/[id]/route.ts):
+    - Parametros: note, records data, userId.
+    - Eliminar todos los WorkoutRecords exisentes del workout.
+    - Vaciar el array de records del workout.
+    - Crear todos los nuevos WorkoutRecords correspondientes y agregarlos al array de records.
 
 ### Measures
 - En caso de no tener un measure creado, al entrar se configurara el measure de Bodyweight del usuario.
