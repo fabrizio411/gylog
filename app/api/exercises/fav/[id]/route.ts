@@ -1,7 +1,7 @@
-import Exercise from "@/libs/models/exercise.model"
-import User from "@/libs/models/user.model"
-import { connectDB } from "@/libs/mongoose"
-import { NextResponse } from "next/server"
+import Exercise from '@/libs/models/exercise.model'
+import User from '@/libs/models/user.model'
+import { connectDB } from '@/libs/mongoose'
+import { NextResponse } from 'next/server'
 
 export async function POST(
     req: Request,

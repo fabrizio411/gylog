@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
     isPremium: { type: Boolean, required: true, default: false },
     firstWeekDay: { type: String, enum: daysArray, default: 'monday' },
     routines: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Routine' }],
+    routinesFiles: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Routinefile' }],
     exercises: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Exercise' }],
     favourites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Exercise' }],
     workouts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Workout' }],

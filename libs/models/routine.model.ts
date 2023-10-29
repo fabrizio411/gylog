@@ -10,6 +10,7 @@ const routineSchema = new mongoose.Schema({
             note: { type: String }
         }
     ],
+    file: { type: mongoose.Schema.Types.ObjectId, ref: 'Routinefile' },
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 }, {
     timestamps: true

@@ -4,6 +4,7 @@ import getUser from '@/libs/utils/getUser'
 import { connectDB } from '@/libs/mongoose'
 import { TypeRoutine, TypeUser } from '@/libs/utils/types'
 import { NextResponse } from 'next/server'
+import Routinefile from '@/libs/models/routinefile.model'
 
 export async function GET() {
     try {
@@ -11,13 +12,25 @@ export async function GET() {
 
         const user: Partial<TypeUser> = await getUser()
 
-        const routines = await Routine.find({ user: user._id })
+        // Buscar las carpetas del usuario y llenar con datos de las rutinas
+        const files = await Routinefile.find({ user: user._id })
+        .populate({
+            path: 'routines',
+            model: Routine
+        })
+
+        if (!files) {
+            return NextResponse.json({ message: 'Error loading files', error: true })
+        }
+
+        // Buscar las rutinas que no esten en ninguna carpeta
+        const routines = await Routine.find({ user: user._id, file: { $in: [null, undefined]} })
 
         if (!routines) {
             return NextResponse.json({ message: 'Error loading routines', error: true })
         }
 
-        return NextResponse.json(routines)
+        return NextResponse.json({ files, routines })
         
     } catch (error) {
         console.log('GET_ROUTINES_ERROR', error)

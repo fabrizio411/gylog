@@ -320,7 +320,8 @@ type WorkoutRecord = {
 #### API
 - [/api/routines - GET](./app/api/routines/route.ts):
     - Obtiener informacion del usuario.
-    - Obtner informacion de las rutinas del usuario.
+    - Obtner informacion de las carpetas de rutinas del usuario.
+    - Obtener informacion de las rutinas que no estan en carpetas del usuario.
 - [/api/routines - POST](./app/api/routines/route.ts):
     - Parametros: name, note, exercises, userId.
     - Verificar informacion valida.
@@ -338,6 +339,21 @@ type WorkoutRecord = {
     - Parametros: name, note, exercises.
     - Verificar informacion valida.
     - Update de la rutina.
+- [/api/rotuines/file - POST](./app/api/routines/file/route.ts):
+    - Parametros: name, routines ids, userId.
+    - Crear nueva carpeta,
+- [/api/rotuines/file/[id] - GET](./app/api/routines/file/[id]/route.ts):
+    - Obtener informacion de la carpeta y completar con los datos de la rutina.
+- [/api/rotuines/file/[id] - DELETE](./app/api/routines/file/[id]/route.ts):
+    - Borrar carpeta.
+    - Borrar la relacion a la carpeta de las rutinas de la misma.
+- [/api/rotuines/file/[id] - PUT](./app/api/routines/file/[id]/route.ts):
+    - Parametros: name, routines.
+    - Obtener informacion de la carpeta para editar.
+    - Borrar la relacion de las rutinas de la misma.
+    - Modificar los datos por los datos nuevos.
+    - Agregar la relacion con las nuevas rutinas.
+
 
 ### Programa
 - El programa solo se puede editar.

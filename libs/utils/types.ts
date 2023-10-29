@@ -22,6 +22,7 @@ export type TypeUser = {
     isPremium: boolean,
     firstWeekDay: 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday',
     routines: string[],
+    routinesFiles: string[],
     exercises: string[],
     favourites: string[],
     workouts: string[],
@@ -36,7 +37,8 @@ export type TypeUserGeneral = {
     username: string,
     image?: string,
     units: TypeUnitsConfig,
-    isPremium: boolean
+    isPremium: boolean,
+    firstWeekDay: TypeDays
 }
 
 export type TypeExercise = {
@@ -62,9 +64,17 @@ export type TypeRoutine = {
             note?: string
         }
     ],
+    file?: string,
     user?: string | TypeUserGeneral | TypeUser,
     createdAt: string,
     updatedAt: string
+}
+
+export type TypeRoutineFile = {
+    _id: string | any,
+    name: string,
+    routines: string[],
+    user: string | TypeUserGeneral
 }
 
 export type TypeProgram = {
