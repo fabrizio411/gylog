@@ -1,9 +1,9 @@
 'use server'
 
 import bcrypt from 'bcrypt'
-import { connectDB } from "../mongoose"
-import Program from "../models/program.model"
-import User from "../models/user.model"
+import { connectDB } from '../mongoose'
+import Program from '../models/program.model'
+import User from '../models/user.model'
 
 export async function userRegister({
     username,

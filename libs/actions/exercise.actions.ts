@@ -1,11 +1,11 @@
 'use server'
 
-import { revalidatePath } from "next/cache";
-import Exercise from "../models/exercise.model";
-import User from "../models/user.model";
-import { TypeExerciseCategory, TypeMuscles } from "../utils/types";
-import { connectDB } from "../mongoose";
-import Routine from "../models/routine.model";
+import { revalidatePath } from 'next/cache';
+import Exercise from '../models/exercise.model';
+import User from '../models/user.model';
+import { TypeExerciseCategory, TypeMuscles } from '../utils/types';
+import { connectDB } from '../mongoose';
+import Routine from '../models/routine.model';
 
 
 export async function exerciseCreate({
@@ -26,6 +26,8 @@ export async function exerciseCreate({
         if (!name || !category || !muscle || !userId) {
             throw new Error('Missing info')
         }
+
+        connectDB()
 
         // Crear Exercise
         const newExercise = await Exercise.create({
