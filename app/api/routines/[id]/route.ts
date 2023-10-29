@@ -6,6 +6,7 @@ import { connectDB } from '@/libs/mongoose'
 import { NextResponse } from 'next/server'
 
 export async function GET(
+    req: Request,
     { params }: { 
         params: { id: string } 
     }
@@ -24,9 +25,16 @@ export async function GET(
             path: 'exercises.exercise',
             model: Exercise,
         })
-
+        
         if (!routine) {
-            return NextResponse.redirect(new URL('/routines'))
+            const path = req.url
+
+            if (path.includes('/routines')) {
+                return NextResponse.redirect(new URL('/routines'))
+            }
+
+            return NextResponse.redirect(new URL('/'))
+
         }
 
         return NextResponse.json(routine)

@@ -258,7 +258,7 @@ type WorkoutRecord = {
     - Encriptar password.
     - Crear nuevo User.
     - Crear nuevo Program.
-- [/api/auth/\[...nextauth\]](./app/api/(auth)/auth/[...nextauth]/route.ts) 
+- [/api/auth/[...nextauth]](./app/api/(auth)/auth/[...nextauth]/route.ts) 
     - Configuracion de NextAuth options.
     - Obtener las credenciales.
     - Comparar contraceñas.
@@ -348,13 +348,24 @@ type WorkoutRecord = {
 
 ### Workout
 - Crear workout: 
-    - El workout parte de una rutina.
+    - El workout se basa en una rutina, el id de esta estara en el url.
     - Con los datos de la rutina se despliega el formulario para completar los datos de cada ejercicio, segun el ejericio que sea y los sets indicados.
     - Los datos de cada ejercicio se guardaran en un WorkoutRecord diferente para cada ejercicio.
     - Este WorkoutRecord incluira los datos ingresados por el usuario, el Id del ejercicio y las unidades utilizadas en para registrar los datos (para saber que coversiones aplicar en caso de cambio).
     - Los Ids de estos WorkoutRecords se guardarn en orden en un array, dentro de un docuemnto Workout.
     - En este tambien se guardara la rutina de la que parte y el usuario que lo relaciona.
     - Se guardara el Id del Workout en el campo workouts del usuario.
+#### API:
+- [/api/workout/[id]](./app/api/workout/[id]/route.ts):
+    - Parametros: note, records data, userId.
+    - Crear instancia del documento workout.
+    - Crear un WorkoutRecord para cada elemento de records data.
+    - Agregar el id del WorkoutRecord al array de records de Workout.
+    - Agregar el id del Workout al usuario.
+
+### Record
+- Record sera la forma de llamarle a un workout una vez este concluye y es creado.
+- Sera llamado de esta manera en las rutas para visualizarlo, editarlo y eliminarlo.
 - Eliminar Workout: 
     - Se eliminaran todos los records asociados al workout y esa data se perdera.
     - Se eliminara el Id del Workout del campo workouts del usuario.
@@ -362,6 +373,7 @@ type WorkoutRecord = {
     - Aparecera el mismo furmulario para crear un Workout, pero con los datos del mismo cargados.
     - Se guardara de la misma manera que es creado.
     - Se deben hacer updates de todos los records asociados. O de los que recibieron cambios (si es posible).
+
 
 
 ### Measures
