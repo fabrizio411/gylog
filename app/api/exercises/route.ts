@@ -2,7 +2,7 @@ import Exercise from '@/libs/models/exercise.model'
 import Routine from '@/libs/models/routine.model'
 import User from '@/libs/models/user.model'
 import { connectDB } from '@/libs/mongoose'
-import { TypeExercise } from '@/libs/utils/types'
+import { TypeExercise, TypeExerciseCategory, TypeMuscles } from '@/libs/utils/types'
 import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
@@ -12,6 +12,12 @@ export async function POST(req: Request) {
         category, 
         muscle, 
         userId 
+    }: {
+        name: string,
+        note: string,
+        category: TypeExerciseCategory,
+        muscle: TypeMuscles,
+        userId: string
     } = await req.json()
 
     // Verificar informacion valida
@@ -40,7 +46,7 @@ export async function POST(req: Request) {
         return NextResponse.json({ message: 'Exercise created', error: true  })
         
     } catch (error) {
-        console.log('CREATE_EXERCISE', error)
+        console.log('CREATE_EXERCISE_ERROR', error)
         return new NextResponse('Internal Error', { status: 500 })
     }
 }
@@ -49,6 +55,9 @@ export async function DELETE(req: Request) {
     const {
         userId,
         exerciseId
+    }: {
+        userId: string,
+        exerciseId: string
     } = await req.json()
 
     try {
@@ -86,7 +95,7 @@ export async function DELETE(req: Request) {
         return NextResponse.json({ message: 'Exercise deleted' })
         
     } catch (error) {
-        console.log('DELETE_EXERCISE', error)
+        console.log('DELETE_EXERCISE_ERROR', error)
         return new NextResponse('Internal Error', { status: 500 })
     }
 }
@@ -99,6 +108,13 @@ export async function PUT(req: Request) {
         muscle, 
         userId,
         exerciseId
+    }: {
+        name: string,
+        note: string,
+        category: TypeExerciseCategory,
+        muscle: TypeMuscles,
+        userId: string,
+        exerciseId: string
     } = await req.json()
 
     if (!name || !category || !muscle || !userId || !exerciseId) {
@@ -120,8 +136,7 @@ export async function PUT(req: Request) {
         ).where({ user: userId })
         
     } catch (error) {
-        console.log('UPDATE_EXERCISE', error)
+        console.log('UPDATE_EXERCISE_ERROR', error)
         return new NextResponse('Internal Error', { status: 500 })
     }
-
 }

@@ -1,7 +1,8 @@
 # Documentación
 
-## TODO
-- [exerciseDelete()](./libs/actions/exercise.actions.ts): sin terminar
+## Code Guidelines
+- Se va a utilizar API routes.
+- Siemrpe se retorn un json con un message (para luego usar un toast). En caso de ser un error de interaccion (no del servidor) se agregara un campo error.
 
 ## Roadmap
 - Redactar las ideas del concepto de la aplicacion.
@@ -15,7 +16,7 @@
     - Funcionalidades del usuario.
     - Funcionalidades para compartir contenido entre usuarios.
     - Funciones para calculos de estadisticas para muestra de datos.
-- Programar las funcionalidades como Server Actions.
+- Programar las funcionalidades como API.
 - Estructurar el modelo de la pagina web. Las paginas que tendra y lo que estas haran.
     - Empezando por los basicos, paginas de interaccion (auth, home, routines, exercises, workout, measures)
     - Paginas de muestra de datos, y muestra visual de estadisticas.
@@ -250,8 +251,8 @@ type WorkoutRecord = {
 - Login: 
     - Se hara login con la funcion signin de Next Auth, tomando el email y la contraceña.
     - Dentro de la configuracion de Next Auth se comparara la contraceña con la encriptada usando Bcrypt.
-#### Funciones:
-- [userRegister()](./libs/actions/auth.actions.ts):
+#### API:
+- [/api/register - POST](./app/api/(auth)/register/route.ts):
     - Verificar disponibilidad de email y username.
     - Encriptar password.
     - Crear nuevo User.
@@ -272,18 +273,21 @@ type WorkoutRecord = {
     - Se eliminara el Id del ejercicio del campo exercises del usuario.
 - Editar ejercicio: 
     - Solo se podra editar el nombre del ejercicio, para mantener los datos como estan.
-#### Funciones:
-- [exerciseCreate()](./libs/actions/exercise.actions.ts):
+#### API:
+- [/api/exercises - POST](./app/api/exercises/route.ts):
+    - Parametros: name, note, category, muscle, userId.
     - Verificar informacion valida.
     - Crear ejercicio.
     - Agregar id del ejercicio al usuario.
     - Revalidate path (/exercises)
-- [exerciseDelete()](./libs/actions/exercise.actions.ts):
+- [/api/exercises - DELETE](./app/api/exercises/route.ts):
+    - Parametros: userId, exerciseId.
     - Eliminar ejercicio.
     - Eliminar id del ejercicio de User.
     - Eliminar el ejercicio de las rutinas actuales del usuario.
     - Revalidate path (/exercises)
-- [exerciseUpdate()](./libs/actions/exercise.actions.ts):
+- [/api/exercises - PUT](./app/api/exercises/route.ts):
+    - Parametros: name, note, category, muscle, userId, exerciseId.
     - Verificar informacion valida.
     - Update del ejercicio.
     - Revalidate path (/exercises)
