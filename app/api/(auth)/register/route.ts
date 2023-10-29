@@ -1,8 +1,8 @@
-import Program from "@/libs/models/program.model";
-import User from "@/libs/models/user.model";
-import { connectDB } from "@/libs/mongoose";
-import { TypeUser } from "@/libs/utils/types";
-import { NextResponse } from "next/server";
+import Program from '@/libs/models/program.model'
+import User from '@/libs/models/user.model'
+import { connectDB } from '@/libs/mongoose'
+import { TypeUser } from '@/libs/utils/types'
+import { NextResponse } from 'next/server'
 import bcrypt from 'bcrypt'
 
 export async function POST(req: Request) {

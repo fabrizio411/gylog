@@ -46,6 +46,7 @@
 - Mongoose: para conectar con base de datos.
 - Bcrypt: encriptacion de password. Y comparacion para login.
 - Zod: validaciones de formularios.
+- Next-Auth: inicio de sesion.
 
 ## Concepto
 - Se establecera un modelo de version gratuita y version premium.
