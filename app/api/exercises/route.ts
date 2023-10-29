@@ -17,6 +17,10 @@ export async function GET() {
             }
         })
 
+        if (!exercises) {
+            return NextResponse.json({ message: 'Error loading exercises', error: true })
+        }
+
         return NextResponse.json(exercises)
 
     } catch (error) {

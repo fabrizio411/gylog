@@ -5,6 +5,26 @@ import { connectDB } from "@/libs/mongoose"
 import { TypeExerciseCategory, TypeMuscles } from "@/libs/utils/types"
 import { NextResponse } from "next/server"
 
+export async function GET(
+    { params }: { 
+        params: { id: string } 
+    }
+) {
+    try {
+        const exercise = await Exercise.findById(params.id)
+
+        if (!exercise) {
+            return NextResponse.redirect(new URL('/exercises'))
+        }
+
+        return NextResponse.json(exercise)
+        
+    } catch (error) {
+        console.log('DELETE_EXERCISE_ERROR', error)
+        return new NextResponse('Internal Error', { status: 500 })
+    }
+}
+
 export async function DELETE(
     { params }: { 
         params: { id: string } 
@@ -76,15 +96,22 @@ export async function PUT(
         connectDB()
 
         // Update Exercise
-        await Exercise.findByIdAndUpdate(
+        const updatedExercise = await Exercise.findByIdAndUpdate(
             params.id,
             {
                 name,
                 note,
                 category,
                 muscle,
-            }
+            },
+            { new: true }
         )
+
+        if (!updatedExercise) {
+            return NextResponse.json({ message: 'Error updating exercise', error: true })
+        }
+
+        return NextResponse.json({ message: 'Exercise updated' })
         
     } catch (error) {
         console.log('UPDATE_EXERCISE_ERROR', error)
