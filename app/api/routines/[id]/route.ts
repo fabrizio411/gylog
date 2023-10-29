@@ -3,7 +3,6 @@ import Program from '@/libs/models/program.model'
 import Routine from '@/libs/models/routine.model'
 import User from '@/libs/models/user.model'
 import { connectDB } from '@/libs/mongoose'
-import { TypeProgram } from '@/libs/utils/types'
 import { NextResponse } from 'next/server'
 
 export async function GET(

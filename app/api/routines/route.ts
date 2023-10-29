@@ -1,7 +1,7 @@
 import Routine from '@/libs/models/routine.model'
 import User from '@/libs/models/user.model'
-import { connectDB } from '@/libs/mongoose'
 import getUser from '@/libs/utils/getUser'
+import { connectDB } from '@/libs/mongoose'
 import { TypeRoutine, TypeUser } from '@/libs/utils/types'
 import { NextResponse } from 'next/server'
 

@@ -1,5 +1,3 @@
-import mongoose from "mongoose"
-
 export type TypeUnitsConfig = {
     weight: 'kg' | 'lbs',
     distance: 'metric' | 'imperial',
@@ -8,7 +6,7 @@ export type TypeUnitsConfig = {
 
 export type TypeUnits = 'kg' | 'g' | 'mg' | 'lbs' | 'km' | 'm' | 'cm' | 'mm' | 'mi' | 'ft' | 'in' | '%' | 'kcal'
 
-export type TypeDays = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday'
+export type TypeDays = 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun'
 
 export type TypeExerciseCategory = 'reps' | 'reps/weight' | 'dur' | 'dur/weight' | 'dist' | 'dist/dur' | 'checkbox'
 

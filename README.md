@@ -258,7 +258,10 @@ type WorkoutRecord = {
     - Encriptar password.
     - Crear nuevo User.
     - Crear nuevo Program.
-
+- [/api/auth/\[...nextauth\]](./app/api/(auth)/auth/[...nextauth]/route.ts) 
+    - Configuracion de NextAuth options.
+    - Obtener las credenciales.
+    - Comparar contraceñas.
 
 ### Ejercicio
 - Crear ejercicio: (max de 5 para usuarios gratis)
@@ -284,18 +287,16 @@ type WorkoutRecord = {
     - Verificar usuario grais si puede crear ejercicios.
     - Crear ejercicio.
     - Agregar id del ejercicio al usuario.
-    - Revalidate path (/exercises)
+- [/api/exercises/[id] - GET](./app/api/exercises/[id]/route.ts):
+    - Obtener informacion de un ejercicio.
 - [/api/exercises/[id] - DELETE](./app/api/exercises/[id]/route.ts):
-    - Parametros: userId, exerciseId.
     - Eliminar ejercicio.
     - Eliminar id del ejercicio de User.
     - Eliminar el ejercicio de las rutinas actuales del usuario.
-    - Revalidate path (/exercises)
 - [/api/exercises/[id] - PUT](./app/api/exercises/[id]/route.ts):
     - Parametros: name, note, category, muscle, userId, exerciseId.
     - Verificar informacion valida.
     - Update del ejercicio.
-    - Revalidate path (/exercises)
 
 ### Rutina
 - Crear rutina: (max de 5 para usuarios gratis)
@@ -312,6 +313,27 @@ type WorkoutRecord = {
     - Se eliminara el Id de la rutina del campo routines del usuario
 - Editar rutina: 
     - Editar rutina funcionara igual a la creacion de la misma, pero con datos ya cargados a esta.
+#### API
+- [/api/routines - GET](./app/api/routines/route.ts):
+    - Obtiener informacion del usuario.
+    - Obtner informacion de las rutinas del usuario.
+- [/api/routines - POST](./app/api/routines/route.ts):
+    - Parametros: name, note, exercises, userId.
+    - Verificar informacion valida.
+    - Verificar usuario grais si puede crear rutinas.
+    - Crear rutina.
+    - Agregar id de la rutina al usuario.
+- [/api/routines/[id] - GET](./app/api/routines/[id]/route.ts):
+    - Obtener informacion de una rutina.
+    - Pupulate con la informacion de cada ejercicio del a rutina.
+- [/api/routines/[id] - DELETE](./app/api/routines/[id]/route.ts):
+    - Eliminar rutnina.
+    - Eliminar id de la rutina de User.
+    - Eliminar la rutina del Program en caso de estar.
+- [/api/routines/[id] - PUT](./app/api/routines/[id]/route.ts):
+    - Parametros: name, note, exercises.
+    - Verificar informacion valida.
+    - Update de la rutina.
 
 ### Programa
 - El programa solo se puede editar.
@@ -319,6 +341,10 @@ type WorkoutRecord = {
 - Se debe poder alterar el orden de estas rutinas dentro del dia.
 - Tambien se debe poder eliminar una rutina del programa.
 - No se pueden incluir ejericicios sueltos en el programa.
+#### API:
+- [/api/program - PUT](./app/api/program/route.ts)
+    - Obtener el Program.
+    - Modificar el dia editado y guardar el program.
 
 ### Workout
 - Crear workout: 
