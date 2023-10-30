@@ -1,15 +1,16 @@
 import Program from '@/libs/models/program.model'
 import { connectDB } from '@/libs/mongoose'
 import getUser from '@/libs/utils/getUser'
-import { TypeDays } from '@/libs/utils/types'
+import { TypeDays, TypeUser } from '@/libs/utils/types'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
     try {
         connectDB()
 
-        const user = await getUser()
+        const user: Partial<TypeUser> = await getUser()
 
+        // Obtener programa del usuario
         const userProgram = await Program.findById(user.program)
     
         if (!userProgram) {
@@ -19,7 +20,7 @@ export async function GET() {
         return NextResponse.json(userProgram)
         
     } catch (error) {
-        console.log('UPDATE_PROGRAM_ERROR', error)
+        console.log('GET_PROGRAM_ERROR', error)
         return new NextResponse('Internal Error', { status: 500 })
     }
 

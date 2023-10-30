@@ -88,7 +88,7 @@ type User = {
 ```
 
 ### Ejercicios
-- Existira una bse de datos de ejercicios comun.
+- Existira una base de datos de ejercicios comun.
 - Los ejercicios tendran un nombre, un tipo, y el musculo motor del ejericio.
 - Categorias de ejericicios:
     - reps: solo se registra el numero de repeticiones.
@@ -297,7 +297,10 @@ type WorkoutRecord = {
     - Parametros: name, note, category, muscle, userId, exerciseId.
     - Verificar informacion valida.
     - Update del ejercicio.
-- [/api/exercises/fav/[id]](./app/api/exercises/fav/[id]/route.ts)
+- [/api/exercises/fav/[id]](./app/api/exercises/fav/route.ts):
+    - Obtener informacion de los ejercicios que tengan el id del usuario como favouriteBy.
+- [/api/exercises/fav/[id] - POST](./app/api/exercises/fav/[id]/route.ts):
+    - Parametros: userId.
     - Encontrar ejercicio con id de params.
     - Eliminar de favoritos en caso de ya estar.
     - Agregarlo a favoritos en caso contrario.
@@ -336,9 +339,15 @@ type WorkoutRecord = {
     - Eliminar id de la rutina de User.
     - Eliminar la rutina del Program en caso de estar.
 - [/api/routines/[id] - PUT](./app/api/routines/[id]/route.ts):
-    - Parametros: name, note, exercises.
+    - Parametros: name, note, exercises, userId.
     - Verificar informacion valida.
-    - Update de la rutina.
+    - Update de la rutina, solo si esta pertenece al usuario.
+- [/api/routines/[id] - POST](./app/api/routines/[id]/route.ts):
+    - Parametros: userId.
+    - Guardar rutinas de otras personas o generales.
+    - Verificar usuario gratis y numero de rutinas.
+    - Obtener informacion de la rutina a copiar.
+    - Generar una copia de la rutina asciada al usuario.
 - [/api/rotuines/file - POST](./app/api/routines/file/route.ts):
     - Parametros: name, routines ids, userId.
     - Crear nueva carpeta,
@@ -353,7 +362,9 @@ type WorkoutRecord = {
     - Borrar la relacion de las rutinas de la misma.
     - Modificar los datos por los datos nuevos.
     - Agregar la relacion con las nuevas rutinas.
-
+- [/api/routines/general - GET](./app/api/routines/general/route.ts):
+    - Obtener informacion de las rutinas generales, no tienen usuario asociado.
+    - Populate informaicon de los ejercicios.
 
 ### Programa
 - El programa solo se puede editar.
@@ -362,9 +373,12 @@ type WorkoutRecord = {
 - Tambien se debe poder eliminar una rutina del programa.
 - No se pueden incluir ejericicios sueltos en el programa.
 #### API:
-- [/api/program - PUT](./app/api/program/route.ts)
+- [/api/program - Get](./app/api/program/route.ts):
+    - Obtener informacion del program del usuario.
+- [/api/program - PUT](./app/api/program/route.ts):
     - Obtener el Program.
     - Modificar el dia editado y guardar el program.
+
 
 ### Workout
 - Crear workout: 

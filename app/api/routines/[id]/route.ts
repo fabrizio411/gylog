@@ -95,7 +95,7 @@ export async function PUT(
         name,
         note,
         exercises,
-        
+        userId
     }: {
         name: string,
         note: string,
@@ -104,6 +104,7 @@ export async function PUT(
             sets: number,
             note: string
         }],
+        userId: string
     } = await req.json()
 
     if (!name) {
@@ -125,7 +126,7 @@ export async function PUT(
                 exercises
             },
             { new: true }
-        )
+        ).where({ user: userId })
 
         if (!updatedRoutine) {
             return NextResponse.json({ message: 'Error updating routine', error: true })
@@ -136,5 +137,62 @@ export async function PUT(
     } catch (error) {
         console.log('UPDATE_ROUTINE_ERROR', error)
         return new NextResponse('Internal Error', { status: 500 })
+    }
+}
+
+// Save existing routine
+export async function POST(
+    req: Request,
+    { params }: { 
+        params: { id: string } 
+    }
+) {
+    const { userId }: { userId: string } = await req.json()
+
+    try {
+        connectDB()
+
+        const user = await User.findById(userId)
+        .select('isPremium routines')
+    
+        // Verificar si es usuario grtis y si puede crear mas rutinas
+        if (!user.isPremium && user.routines.length >= 5) {
+            return NextResponse.json({ message: 'Max routines created', error: true })
+        }
+
+        const routine = await Routine.findById(params.id)
+        .populate({
+            path: 'user',
+            model: User,
+            select: '_id username' 
+        })
+
+        if (!routine) {
+            return NextResponse.json({ message: 'Error saving routine', error: true })
+        }
+
+        const newRoutine = await Routine.create({
+            name: routine.name + ` - ${routine.user.username}`,
+            note: routine.note,
+            exercises: routine.exercises,
+            file: undefined,
+            user: userId
+        })
+
+        if (!newRoutine) {
+            return NextResponse.json({ message: 'Error saving routine', error: true })
+        }
+
+        await User.findByIdAndUpdate(
+            userId,
+            {
+                $push: { routines: newRoutine._id }
+            }
+        )
+        
+        return NextResponse.json({ message: 'Routine saved' })
+
+    } catch (error) {
+        
     }
 }
