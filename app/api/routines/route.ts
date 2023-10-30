@@ -19,16 +19,8 @@ export async function GET() {
             model: Routine
         })
 
-        if (!files) {
-            return NextResponse.json({ message: 'Error loading files', error: true })
-        }
-
         // Buscar las rutinas que no esten en ninguna carpeta
         const routines = await Routine.find({ user: user._id, file: { $in: [null, undefined]} })
-
-        if (!routines) {
-            return NextResponse.json({ message: 'Error loading routines', error: true })
-        }
 
         return NextResponse.json({ files, routines })
         

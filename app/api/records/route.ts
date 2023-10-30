@@ -12,10 +12,6 @@ export async function GET() {
 
         const workouts = Workout.find({ user: user._id })
 
-        if (!workouts) {
-            return NextResponse.json({ message: 'Error loading workouts', error: true })
-        }
-
         return NextResponse.json(workouts)
         
     } catch (error) {
