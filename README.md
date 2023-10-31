@@ -485,6 +485,15 @@ type WorkoutRecord = {
 ### Estadisticas
 
 
+### Utils
+- [convertUnits()](./libs/utils/utils.ts):
+    - Parametros: useUnit, data (value, unit).
+    - Si no hay que hacer conversion devuelve el valor.
+    - En caso de conversion dentro del mismo sistema de medida se hace la conversion.
+    - En el otro caso se hace la conversion al otro sistema de medida:
+        - Entrada: en kg o lbs | en km o mi.
+        - Salida: en estas mismas unidades.
+    - Devuelve el valor del dato convertido a useUnit en caso de diferencia de unidades.
 
 ## Ideas
 - PROGRAMA: marcar cuando una rutina esta hecha fijandose qeu haya un workout con la fecha de hoy con el id de la rutina.

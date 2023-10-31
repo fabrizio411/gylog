@@ -2,7 +2,6 @@ import { authOptions } from '@/app/api/(auth)/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 import { connectDB } from '../mongoose';
 import User from '../models/user.model';
-import { TypeUser } from './types';
 
 // Get next auth session
 const getSession = async () => {

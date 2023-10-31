@@ -6,7 +6,7 @@ export type TypeUnitsConfig = {
 
 export type TypeToMeasure = 'weight' | 'length' | 'percentage' | 'calories'
 
-export type TypeUnits = 'kg' | 'g' | 'mg' | 'lbs' | 'km' | 'm' | 'cm' | 'mm' | 'mi' | 'ft' | 'in' | '%' | 'kcal'
+export type TypeUnits = 'kg' | 'g' | 'mg' | 'lbs' | 'oz' | 'km' | 'm' | 'cm' | 'mm' | 'mi' | 'ft' | 'in' | '%' | 'kcal'
 
 export type TypeDays = 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun'
 
