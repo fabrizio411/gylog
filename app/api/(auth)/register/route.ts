@@ -4,6 +4,7 @@ import { connectDB } from '@/libs/mongoose'
 import { TypeUser } from '@/libs/utils/types'
 import { NextResponse } from 'next/server'
 import bcrypt from 'bcrypt'
+import Measure from '@/libs/models/measure.model'
 
 export async function POST(req: Request) {
     const {
@@ -58,7 +59,16 @@ export async function POST(req: Request) {
 
         await newUser.save()
 
-        return NextResponse.json({ message: 'Sign Up succesfully'})
+        // Crear la measure general de bodyweight
+        await Measure.create({
+            name: 'Bodyweight',
+            toMeasure: 'weight',
+            useUnit: newUser.units.weight,
+            records: [],
+            user: newUser._id
+        })
+
+        return NextResponse.json({ message: 'Sign Up succesfully' })
         
     } catch (error) {
         console.log('REGISTER_ERROR', error)

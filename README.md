@@ -258,6 +258,7 @@ type WorkoutRecord = {
     - Encriptar password.
     - Crear nuevo User.
     - Crear nuevo Program.
+    - Crear Measure de bodyweight.
 - [/api/auth/[...nextauth]](./app/api/(auth)/auth/[...nextauth]/route.ts) 
     - Configuracion de NextAuth options.
     - Obtener las credenciales.
@@ -389,14 +390,6 @@ type WorkoutRecord = {
     - Los Ids de estos WorkoutRecords se guardarn en orden en un array, dentro de un docuemnto Workout.
     - En este tambien se guardara la rutina de la que parte y el usuario que lo relaciona.
     - Se guardara el Id del Workout en el campo workouts del usuario.
-#### API:
-- [/api/workout/[id] - POST](./app/api/workout/[id]/route.ts):
-    - Parametros: note, records data, userId.
-    - Crear instancia del documento workout.
-    - Crear un WorkoutRecord para cada elemento de records data.
-    - Agregar el id del WorkoutRecord al array de records de Workout.
-    - Agregar el id del Workout al usuario.
-
 ### Record
 - Record sera la forma de llamarle a un workout una vez este concluye y es creado.
 - Sera llamado de esta manera en las rutas para visualizarlo, editarlo y eliminarlo.
@@ -408,15 +401,21 @@ type WorkoutRecord = {
     - Se guardara de la misma manera que es creado.
     - Se deben hacer updates de todos los records asociados. O de los que recibieron cambios (si es posible).
 #### API:
-- [/api/records - GET](./app/api/records/route.ts):
+- [/api/workout/[id] - POST](./app/api/workout/[id]/route.ts):
+    - Parametros: note, records data, userId.
+    - Crear instancia del documento workout.
+    - Crear un WorkoutRecord para cada elemento de records data.
+    - Agregar el id del WorkoutRecord al array de records de Workout.
+    - Agregar el id del Workout al usuario.
+- [/api/workout/records - GET](./app/api/workout/records/route.ts):
     - Obtener informacion de los workouts del usuario.
-- [/api/records - GET](./app/api/records/[id]/route.ts):
+- [/api/workout/records - GET](./app/api/workout/records/[id]/route.ts):
     - Obtener informacion de un workout.
-- [/api/records - DELETE](./app/api/records/[id]/route.ts):
+- [/api/workout/records - DELETE](./app/api/workout/records/[id]/route.ts):
     - Borrar el workout.
     - Eliminar el id del workout del User.
     - Borrar todos los documentos de WorkoutRecords asociados al workout.
-- [/api/records - PUT](./app/api/records/[id]/route.ts):
+- [/api/workout/records - PUT](./app/api/workout/records/[id]/route.ts):
     - Parametros: note, records data, userId.
     - Eliminar todos los WorkoutRecords exisentes del workout.
     - Vaciar el array de records del workout.
@@ -438,7 +437,7 @@ type WorkoutRecord = {
     - Se podra editar el nombre, y la configuracion de unidades.
     - Cambiar las unidades no cambiara los datos de los anteriores registros.
     - NO se podra editar el tipo de medida.
-#### Registro de measure
+#### Record de measure
 - Crear registro de measure: 
     - Se guardara una fehca que tendra como valor default la actual, pero podra ser cambiada por el usuario.
     - Se guardara  la unidad actual del Measure que referencia junto con el valor, para hacer conversion en caso de cambio.
@@ -449,6 +448,33 @@ type WorkoutRecord = {
 - Eliminar un registro de measure: 
     - Al elimina el MeasureRecords completo.
     - No afecta nada mas.
+#### API:
+- [/api/measures - GET](./app/api/measures/route.ts):
+    - Obetener informacion de las measures del usuario.
+- [/api/measures - POST](./app/api/measures/route.ts):
+    - Parametros: name, toMeasure, useUnit, userId.
+    - Crear nueva measure.
+    - Agregar measure al User.
+- [/api/measures/[id] - GET](./app/api/measures/[id]/route.ts):
+    - Obtener informacion de la measure.
+    - Populate la informacion de los records de esa measure.
+- [/api/measures/[id] - DELETE](./app/api/measures/[id]/route.ts):
+    - Borrar measure.
+    - Borrar todos los records asociados a la measure.
+    - Borrar id de measure del user.
+- [/api/measures/[id] - PUT](./app/api/measures/[id]/route.ts):
+    - Parametros: name, useUnit, userId.
+    - Editar informacion de la measure.
+- [/api/measures/records - POST](./app/api/measures/records/route.ts):
+    - Parametros: measureId, value, unit, date, userId.
+    - Crear nuevo MeasureRecord.
+    - Agregar id del MeasureRecord al Measure.
+- [/api/measures/records/[id] - DELETE](./app/api/measures/records/[id]/route.ts):
+    - Borrar MeasureRecord.
+    - Borrar id del Measure record del Measure.
+- [/api/measures/records/[id] - PUT](./app/api/measures/records/[id]/route.ts):
+    - Parametros: value, unit, date, userId.
+    - Editar informacion del MeasureRecord.
 
 ### Compartir contenido
 - Se debe poder acceder al link de una rutina o de un ejercicio creado por otra persona.

@@ -1,3 +1,5 @@
+export const toMeasureArray = ['weight', 'length', 'percentage', 'calories']
+
 export const unitsArray = ['kg', 'g', 'mg', 'lbs', 'km', 'm', 'cm', 'mm', 'mi', 'ft', 'in', '%']
 
 export const exerciseCategoryArray = ['reps', 'reps/weight', 'dur', 'dur/weight', 'dist', 'dist/dur', 'checkbox']

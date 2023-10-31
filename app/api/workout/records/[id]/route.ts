@@ -49,9 +49,7 @@ export async function DELETE(
         )
 
         // Eliminar todos los records asociados al workout
-        for (let i = 0; i < deletedWorkout.records; i++) {
-            await Workoutrecord.findByIdAndDelete(deletedWorkout.records[i])
-        }
+        await Workoutrecord.deleteMany({ _id: { $in: deletedWorkout.records } })
 
         return NextResponse.json({ message: 'Workout deleted' })
         
@@ -95,10 +93,9 @@ export async function PUT(
             return NextResponse.json({ message: 'Workout not found', error: true })
         }
 
+        await Workoutrecord.deleteMany({ _id: { $in: userWorkout.records } })
+
         // Eliminar los viejos docuemtnos de record
-        for (let i = 0; i < userWorkout.records.length; i++) {
-            await Workoutrecord.findByIdAndDelete(userWorkout.records[i])
-        }
 
         userWorkout.records = []
 

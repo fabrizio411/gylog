@@ -4,6 +4,8 @@ export type TypeUnitsConfig = {
     size: 'metric' | 'imperial'
 }
 
+export type TypeToMeasure = 'weight' | 'length' | 'percentage' | 'calories'
+
 export type TypeUnits = 'kg' | 'g' | 'mg' | 'lbs' | 'km' | 'm' | 'cm' | 'mm' | 'mi' | 'ft' | 'in' | '%' | 'kcal'
 
 export type TypeDays = 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun'

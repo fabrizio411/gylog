@@ -10,7 +10,6 @@ const userSchema = new mongoose.Schema({
         weight: { type: String, enum: ['kg', 'lbs'], default: 'kg' },
         distance: { type: String, enum: ['metric', 'imperial'], default: 'metric' },
         size: { type: String, enum: ['metric', 'imperial'], default: 'metric' },
-
     },
     isPremium: { type: Boolean, required: true, default: false },
     firstWeekDay: { type: String, enum: daysArray, default: 'monday' },

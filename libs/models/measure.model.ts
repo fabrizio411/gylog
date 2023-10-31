@@ -1,9 +1,9 @@
 import mongoose from 'mongoose'
-import { unitsArray } from '../utils/constants'
+import { toMeasureArray, unitsArray } from '../utils/constants'
 
 const measureSchema = new mongoose.Schema({
     name: { type: String, required: true },
-    toMeasure: { type: String, required: true, enum: ['weight', 'length', 'percentage', 'calories'] },
+    toMeasure: { type: String, required: true, enum: toMeasureArray },
     useUnit: { type: String, required: true, enum: unitsArray },
     records: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Measurerecord' }],
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
