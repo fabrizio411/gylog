@@ -107,15 +107,16 @@ export type TypeWorkoutRecord = {
     _id: string | any,
     note?: string,
     exercese: string | TypeExercise,
-    dataOne: number,
+    dataOne: number[],
     unitOne: TypeUnits,
-    dataTwo: number,
+    dataTwo: number[],
     unitTwo: TypeUnits,
-    rpe: number,
-    rir: number,
+    rpe: number[],
+    rir: number[],
     workout: string | TypeWorkout,
     routine: string | TypeRoutine,
     user: string | TypeUserGeneral | TypeUser,
+    createdAt: string
 }
 
 export type TypeMeasure = {

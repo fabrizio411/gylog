@@ -495,7 +495,13 @@ type WorkoutRecord = {
 - Esto se debe controlar en la funcion de obtener los datos de la rutina o el ejercicio.
 
 ### Estadisticas
-
+[exerciseBestValues()](./libs/utils/statistics.ts):
+    - Devuelve un objeto con los siguentes datos:
+        - Maximas repeticiones (dato, dato secundario, fecha)
+        - Maximo peso (dato, dato secundario, fecha)
+        - Maximo volumen (dato, fecha)
+        - Total repeticiones.
+        - Total volumen.
 
 ### Utils
 - [convertUnits()](./libs/utils/utils.ts):
