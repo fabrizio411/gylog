@@ -1,5 +1,8 @@
 # Documentación
 
+## FALTA
+- Funciones para estructurar datos para las graficas.
+
 ## Code Guidelines
 - Se va a utilizar API routes.
 - Siemrpe se retorn un json con un message (para luego usar un toast). En caso de ser un error de interaccion (no del servidor) se agregara un campo error.
@@ -57,9 +60,24 @@
 - Con rutinas y ejercicios personalizados por los usuarios.
 - Mostrando datos con distintos analisis y graficos de los mismos, ya sean datos de rutinas o ejercicios en particular. Incluso ejercicios dentro de determinada rutina solamente.
 - Posibilidad de crear una planificacion semanal, pudiendo agregar diferentes rutinas a cada dia de la semana, y mostrando que rutina hay para el dia actual.
+- Compartir contenido:
+    - Se debe poder acceder al link de una rutina o de un ejercicio creado por otra persona.
+    - No se podra acceder a ningun otro tipo de dato.
+    - Al acceder aparecera una opcion para guardar esa template en tu base de datos.
+    - Esto se debe controlar en la funcion de obtener los datos de la rutina o el ejercicio.
+
+## Ideas
+- PROGRAMA: marcar cuando una rutina esta hecha fijandose qeu haya un workout con la fecha de hoy con el id de la rutina.
+
+## Version Gratuita/Premium
+- 5 ejercicios personalizados / Ejercicios personalizados ilimitados.
+- 5 rutinas / Rutinas ilimitadas.
+- Medida solo de peso corporal / Crear medidas personalizadas.
+- Track de reps y peso / Tambien track de RIR y RPE.
+
+
 
 ## Datos y estruturas
-
 ### User 
 - Se llevara cuenta de las unidades seleccionadas por el usuario y se usasran luego para generar los datos que las necesiten.
 - Se guardara el primer dia de la semana del usuario, para mostrar el programa
@@ -236,7 +254,33 @@ type WorkoutRecord = {
 }
 ```
 
-## Funcionalidades
+
+## Funciones (Utils)
+### Estadisticas
+- Estas functiones no son parte de la API, se pueden acceder desde cualquier lugar
+- [exerciseBestValues()](./libs/utils/statistics.ts):
+    - Devuelve un objeto con los siguentes datos:
+        - Maximas repeticiones (dato, dato secundario, fecha)
+        - Maximo peso (dato, dato secundario, fecha)
+        - Maximo volumen (dato, fecha)
+        - Total repeticiones.
+        - Total volumen.
+        - Total veces hecha el ejercicio.
+        - Estimacion RM con formula Brzycki.
+
+### Utils
+- [convertUnits()](./libs/utils/utils.ts):
+    - Parametros: useUnit, data (value, unit).
+    - Si no hay que hacer conversion devuelve el valor.
+    - En caso de conversion dentro del mismo sistema de medida se hace la conversion.
+    - En el otro caso se hace la conversion al otro sistema de medida:
+        - Entrada: en kg o lbs | en km o mi.
+        - Salida: en estas mismas unidades.
+    - Devuelve el valor del dato convertido a useUnit en caso de diferencia de unidades.
+
+
+
+## Funcionalidades API
 ### Usuario
 - Registrarse:
     - Validacion con Zod.
@@ -488,39 +532,3 @@ type WorkoutRecord = {
     - Parametros: value, unit, date, userId.
     - Editar informacion del MeasureRecord.
 
-### Compartir contenido
-- Se debe poder acceder al link de una rutina o de un ejercicio creado por otra persona.
-- No se podra acceder a ningun otro tipo de dato.
-- Al acceder aparecera una opcion para guardar esa template en tu base de datos.
-- Esto se debe controlar en la funcion de obtener los datos de la rutina o el ejercicio.
-
-### Estadisticas
-[exerciseBestValues()](./libs/utils/statistics.ts):
-    - Devuelve un objeto con los siguentes datos:
-        - Maximas repeticiones (dato, dato secundario, fecha)
-        - Maximo peso (dato, dato secundario, fecha)
-        - Maximo volumen (dato, fecha)
-        - Total repeticiones.
-        - Total volumen.
-
-### Utils
-- [convertUnits()](./libs/utils/utils.ts):
-    - Parametros: useUnit, data (value, unit).
-    - Si no hay que hacer conversion devuelve el valor.
-    - En caso de conversion dentro del mismo sistema de medida se hace la conversion.
-    - En el otro caso se hace la conversion al otro sistema de medida:
-        - Entrada: en kg o lbs | en km o mi.
-        - Salida: en estas mismas unidades.
-    - Devuelve el valor del dato convertido a useUnit en caso de diferencia de unidades.
-
-## Ideas
-- PROGRAMA: marcar cuando una rutina esta hecha fijandose qeu haya un workout con la fecha de hoy con el id de la rutina.
-
-
-
-
-## Version Gratuita/Premium
-- 5 ejercicios personalizados / Ejercicios personalizados ilimitados.
-- 5 rutinas / Rutinas ilimitadas.
-- Medida solo de peso corporal / Crear medidas personalizadas.
-- Track de reps y peso / Tambien track de RIR y RPE.
