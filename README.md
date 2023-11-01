@@ -263,6 +263,18 @@ type WorkoutRecord = {
     - Configuracion de NextAuth options.
     - Obtener las credenciales.
     - Comparar contraceñas.
+- [/api/user/[id] - GET](./app/api/user/[id]/route.ts):
+    - Obtener informacion del usuario.
+- [/api/user/[id] - PUT](./app/api/user/[id]/route.ts):
+    - Parametros: username, image.
+    - Editar la informacion del usuario.
+- [/api/user/[id]/units - PUT](./app/api/user/[id]/units/route.ts):
+    - Parametros: weight, distance, size.
+    - Editar la infomacion de las unidades el el usuario.
+- [/api/user/[id]/premium - PUT](./app/api/user/[id]/premium/route.ts):
+    - Parametros: currentState (del premium del usuario).
+    - Editar la infomacion del estado de isPremium del usuario.
+
 
 ### Ejercicio
 - Crear ejercicio: (max de 5 para usuarios gratis)
