@@ -532,3 +532,37 @@ type WorkoutRecord = {
     - Parametros: value, unit, date, userId.
     - Editar informacion del MeasureRecord.
 
+
+
+## Desarrollo Web
+### Codigos de diseño y desarrollo
+- Colores:
+- Fuentes:
+- Tamaños: 
+
+### Maquetacion de paginas
+#### Auth
+- [Login](#login) y [register](#register).
+- Paginas de login y registro.
+- Seran dos paginas separadas que utilizaran un mismo [formulario (AuthForm)](#authform).
+
+#### Login
+- Pagina para ingresar un usuario.
+- Se utilizara [NextAuth](#librerias) para la validacion del usuario y la creacion de la sesion.
+- Se pedira Email y Password para el ingreso.
+- Corroborar que lo ingresado tenga un formato de email, en caso contrario desabilitar el boton.
+- Los errores del formulario se mostraran debajo de cada input.
+- Errores generales se mostraran sobre el contenedor de los inputs.
+
+#### Register
+- Pagina para regsitrar usuario.
+- Se utilizara [NextAuth](#librerias) para la validacion del usuario y la creacion de la sesion.
+- Se pedira Email, Username, password y se podra agregar una imagen de perfil.
+- Para poder enviar se corroborara que el username y el email no exitan y que este ultimo sea un formato email valido.
+- Los errores del formulario se mostraran debajo de cada input.
+- Errores generales se mostraran sobre el contenedor de los inputs.
+
+
+### Componentes
+#### AuthForm
+- Utiizado en [Login](#login), [Register](#register).
