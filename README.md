@@ -2,6 +2,8 @@
 
 ## FALTA
 - Funciones para estructurar datos para las graficas.
+- En API program, ver forma de verificar si se hizo la rutina del program del dia.
+- Funcion para saber el enfoque de la rutina.
 
 ## Code Guidelines
 - Se va a utilizar API routes.
@@ -95,7 +97,9 @@ type User = {
         size: 'metric' | 'imperial'
     },
     isPremium: boolean,
+    firstWeekDay: string,
     routines: string[], // user routines Ids
+    routinesFiles: string[] // user files Ids
     exercises: string[], // user exercises Ids
     favourites: string[], // exercises Ids
     workouts: string[], // user workouts Ids
@@ -166,8 +170,17 @@ type Rutina = {
             note?: string
         }
     ],
+    file: string // file Id
     user?: string,
     createdAt: string
+}
+```
+```typescript
+type RutinaFile = {
+    _id: string,
+    name: string,
+    routines: string[] // routines Ids
+    user: string
 }
 ```
 
@@ -231,9 +244,9 @@ type Workout = {
     _id: string,
     note?: string,
     routine: string, // routine Id
-    exercises: string[], // records Ids
-    cratedAt: string,
+    records: string[], // records Ids
     user: string
+    cratedAt: string,
 }
 ```
 - Estructura de datos de los registros de ejercicios:
@@ -250,7 +263,8 @@ type WorkoutRecord = {
     rir?: number,
     workout: string, // workoutId
     routine: string, // routineId
-    user: string
+    user: string,
+    createdAt: string
 }
 ```
 
@@ -534,13 +548,11 @@ type WorkoutRecord = {
 
 
 
-## Desarrollo Web
+## Maquetacion de la web
 ### Codigos de diseño y desarrollo
 - Colores:
 - Fuentes:
-- Tamaños: 
-
-### Maquetacion de paginas
+- Tamaños:
 #### Auth
 - [Login](#login) y [register](#register).
 - Paginas de login y registro.
@@ -553,6 +565,7 @@ type WorkoutRecord = {
 - Corroborar que lo ingresado tenga un formato de email, en caso contrario desabilitar el boton.
 - Los errores del formulario se mostraran debajo de cada input.
 - Errores generales se mostraran sobre el contenedor de los inputs.
+- Al ingresar se redireccionara a [Home](#home)
 
 #### Register
 - Pagina para regsitrar usuario.
@@ -561,8 +574,103 @@ type WorkoutRecord = {
 - Para poder enviar se corroborara que el username y el email no exitan y que este ultimo sea un formato email valido.
 - Los errores del formulario se mostraran debajo de cada input.
 - Errores generales se mostraran sobre el contenedor de los inputs.
+- Al registrar se redireccionara a [Home](#home)
+
+#### Home
+- Pagina de inicio.
+- Al hacer login o register se redireccionara a esta pagina. Igual que al hacer click en el logo.
+- Se mostrara:
+    - El programa semanal, sin las rutinas, pero con los dias ya completados marcados.
+    - Las rutunas pendientes para el dia.
+    - Acceso a configuracion.
 
 
-### Componentes
+#### Routines
+- Acciones: 
+    - Crear rutina: [RoutineCreateBtn](#routinecreatebtn)
+    - Crear carpeta: [FileCreateBtn](#filecreatebtn)
+- Se mostrara:
+    - Las carpetas del usuario: estran se podran desplegar y minimizar: [FileCard](#filecard)
+    - Las rutinas del usuario: [RoutineCard](#routinecard)
+    - Acceso a las carpetas de rutinas prefedinidas.
+
+#### Measures
+- Se cargara siempre el measure de bodyweight inicialmente.
+- Acciones:
+    - Cargar diferente measure: [MeasureChangeButton](#measurechangebutton)
+    - Crear nuevo measure: [MeasureCreateButton](#measurecreatebutton)
+    - Cargar nuevo dato: [MeasureRecordLogButton](#measurerecordlogbutton)
+- Se mostrara
+    - Measure actual.
+    - Los records del measure ordenados por fecha: [MeasureRecordCard](#measurerecordcard)
+
+#### Profile
+- Perfil del usuario
+- Se mostrara:
+    - Datos del perfil del usuario: [ProfileInfoCard](#profileinfocard)
+    - Graficos con estadisticas basicas del usuario: [ProfileGraphsCard](#profilegraphscard)
+    - Botonos de acceso al program, measures, exercises, y history del usuario.
+    - Acceso a configuracion.
+    - Acceso a subscripcion en caso de no ser premium
+
+
+## Componentes 
+### Nav
+- Home: (Icono: )
+- Profile: (Icono: )
+- Routines: (Icono: )
+- Measures: (Icono: )
+
+### Actions
+#### RoutineCreateBtn
+- Encargado de crear una rutina.
+
+#### FileCreateBtn
+- Encargado de crear una carpeta de rutinas.
+
+#### MeasureChangeButton
+- Encargado de cambiar el measure que se renderiza.
+- Sera un select input.
+
+#### MeasureCreateButton
+- Encargado de crear una nueva measure.
+
+#### MeasureRecordLogButton
+- Encargado de cargar un nuevo registro de la measure.
+
+#### MeasureEditRecordLogButton
+- Encargado de editar un registro de la measure.
+
+### Forms
 #### AuthForm
 - Utiizado en [Login](#login), [Register](#register).
+
+### Cards
+#### FileCard
+- Mostrar una carpeta de rutinas.
+- Nombre y numero de rutinas que contiene.
+- Boton para desplegar y ocultar el contenido de la misma.
+
+#### RoutineCard
+- Mostrar datos generales de una rutina.
+- Nombre, perimeros tres ejercicios, enfoque de la rutina.
+- Boton para iniciar la rutina.
+
+#### MeasureRecordCard
+- Mostrar el record del measure.
+- Valor con unidades correspondientes de la measure.
+- Fecha del registro.
+- Acciones: Editar registro: [MeasureEditRecordLogButton](#measureeditrecordlogbutton)
+
+#### ProfileInfoCard
+- Mostrar datos generales del usuario.
+- Datos:
+    - Fehca de creacion.
+    - Varsion de usuario (gratis premium).
+    - Username.
+    - Total workouts.
+
+#### ProfileGraphsCard
+- Graficos de datos del usuario.
+- Graficos:
+    - Workouts/semana.
