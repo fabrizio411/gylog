@@ -451,7 +451,7 @@ type WorkoutRecord = {
     - Modificar el dia editado y guardar el program.
 
 
-### Workout
+### Workout funciones
 - Crear workout: 
     - El workout se basa en una rutina, el id de esta estara en el url.
     - Con los datos de la rutina se despliega el formulario para completar los datos de cada ejercicio, segun el ejericio que sea y los sets indicados.
@@ -491,7 +491,7 @@ type WorkoutRecord = {
     - Vaciar el array de records del workout.
     - Crear todos los nuevos WorkoutRecords correspondientes y agregarlos al array de records.
 
-### Measures
+### Measures funciones
 - En caso de no tener un measure creado, al entrar se configurara el measure de Bodyweight del usuario.
 - Habra un measure bodyweight para cada usuario.
 #### Categoria Measure
@@ -559,6 +559,7 @@ type WorkoutRecord = {
 - Seran dos paginas separadas que utilizaran un mismo [formulario (AuthForm)](#authform).
 
 #### Login
+- '/login'
 - Pagina para ingresar un usuario.
 - Se utilizara [NextAuth](#librerias) para la validacion del usuario y la creacion de la sesion.
 - Se pedira Email y Password para el ingreso.
@@ -568,6 +569,7 @@ type WorkoutRecord = {
 - Al ingresar se redireccionara a [Home](#home)
 
 #### Register
+- '/register'
 - Pagina para regsitrar usuario.
 - Se utilizara [NextAuth](#librerias) para la validacion del usuario y la creacion de la sesion.
 - Se pedira Email, Username, password y se podra agregar una imagen de perfil.
@@ -577,24 +579,66 @@ type WorkoutRecord = {
 - Al registrar se redireccionara a [Home](#home)
 
 #### Home
+- '/'
 - Pagina de inicio.
 - Al hacer login o register se redireccionara a esta pagina. Igual que al hacer click en el logo.
 - Se mostrara:
     - El programa semanal, sin las rutinas, pero con los dias ya completados marcados.
-    - Las rutunas pendientes para el dia.
-    - Acceso a configuracion.
-
+    - Este dara acceso al [programa](#program).
+    - Las [rutunas pendientes](#routinecard) para el dia.
+    - Acceso a [configuracion](#configuracion).
 
 #### Routines
+- '/routines'
 - Acciones: 
-    - Crear rutina: [RoutineCreateBtn](#routinecreatebtn)
-    - Crear carpeta: [FileCreateBtn](#filecreatebtn)
+    - [Crear rutina](#routinescreate).
+    - Crear carpeta: [FileCreateBtn](#filecreatebtn).
+    - Eliminar rutina: [RoutineDeleteBtn](#routinedeletebtn).
 - Se mostrara:
     - Las carpetas del usuario: estran se podran desplegar y minimizar: [FileCard](#filecard)
     - Las rutinas del usuario: [RoutineCard](#routinecard)
-    - Acceso a las carpetas de rutinas prefedinidas.
+    - Acceso a las carpetas de [rutinas prefedinidas](#rutinas-predefinidas).
+
+#### Routines/create
+- '/routines/create'
+- Encargada de crear una rutina
+- Usara [RoutineForm](#routineform) para la informacion de la rutina.
+
+#### Routines/edit/id
+- '/routines/edit/:id'
+- Encargada de editar una rutina.
+- Usara [RoutineForm](#routineform) con los datos de la rutina ya cargados para la informacion de la rutina.
+
+#### Routines/id
+- '/routines/:id'
+- Mostrara la informacion completa de la rutina.
+- Acciones: 
+    - Eliminar rutina: [RoutineDeleteBtn](#routinedeletebtn)
+    - [Editar rutina](#routineseditid).
+    - Compartir rutina: [ShareContentBtn](#sharecontentbtn)
+
+#### Rutinas predefinidas
+- '/routines/explore'
+- Incluira una lista con las [carpetas](#filecard) de las rutinas predefinidas.
+- Las rutinas se podran acceder y agregar a tus rutinas: [RoutineCreateBtn].
+
+#### Exercises
+- '/exercises'
+- Se mostrara una lista de [ejercicios](#exercisecard). 
+- Contiene los ejercicios generales y los creados por el usuario ordenados alfabeticamente.
+- Acciones: 
+    - Buscador de ejercicios
+    - Filtro de ejercicios por musculo.
+    - Boton para crear ejercicios: [ExerciseCreateBtn](#exercisecreatebtn)
+
+#### Exercises/id
+- '/exercises/:id'
+- Se mostrara toda la ifnormacion del ejercicio junto con las estadisticas del mismo
+- Habra tambien una pestaña de historial, donde se mostaran los [workouts](#workoutrecordcard) que le lo incluyen.
+- Compartir ejercicio personalizado: [ShareContentBtn](#sharecontentbtn)
 
 #### Measures
+- '/measures'
 - Se cargara siempre el measure de bodyweight inicialmente.
 - Acciones:
     - Cargar diferente measure: [MeasureChangeButton](#measurechangebutton)
@@ -605,14 +649,46 @@ type WorkoutRecord = {
     - Los records del measure ordenados por fecha: [MeasureRecordCard](#measurerecordcard)
 
 #### Profile
+- '/profile'
 - Perfil del usuario
 - Se mostrara:
     - Datos del perfil del usuario: [ProfileInfoCard](#profileinfocard)
     - Graficos con estadisticas basicas del usuario: [ProfileGraphsCard](#profilegraphscard)
-    - Botonos de acceso al program, measures, exercises, y history del usuario.
-    - Acceso a configuracion.
-    - Acceso a subscripcion en caso de no ser premium
+    - Botonos de acceso al [program](#program), [measures](#measures), [exercises](#exercises), y [history](#history) del usuario.
+    - Acceso a [configuracion](#configuracion).
+    - Acceso a [subscripcion](#premium-modal) en caso de no ser premium.
 
+#### Program
+- '/program'
+- Programa del usuario.
+- Se mostrara una lista de todos los dias con las [rutinas](#routinecard) de los mismos.
+- Acciones:
+    - Cambiar el orden de las rutinas en el program.
+    - Eliminar rutinas.
+    - Agregar rutinas a un dia.
+
+#### Workout/id
+- '/workout/:id'
+- Pagina dinamica.
+- Contiene toda la informacion de el workout del id.
+- Compartir informacion del workout: [ShareContentBtn](#sharecontentbtn)
+
+
+#### History
+- '/history'
+- Mostrara una lista con todos los [entrenamientos](#workoutrecordcard) del usuario ordenados por fecha.
+- A traves de esots se podra acceder a la pagina del [workout](#workoutid) para tener la infomacion completa del mismo.
+
+#### Configuracion
+- '/settings'
+- Configuracion de la aplicacion y de la cuenta.
+- Acciones: 
+    - Editar perfil.
+    - Cambair unidades.
+
+#### Premium
+- '/premium'
+- Pagina de cambo de plan.
 
 ## Componentes 
 ### Nav
@@ -622,45 +698,97 @@ type WorkoutRecord = {
 - Measures: (Icono: )
 
 ### Actions
-#### RoutineCreateBtn
-- Encargado de crear una rutina.
+#### ShareContentBtn
+- Encargado de compiar el link del contenido actual.
+- Sera un elemento con children para poner el contenido del boton.
+- Usado en:
+    - [Routines/id](#routinesid).
+    - [Exercises/id](#exercisesid).
+    - [Workout/id](#workoutid).
+
+#### RoutineDeleteBtn
+- Encargado de eliminar una rutina.
+- Usado en:
+    - [Routines](#routines)
+    - [Routines/id](#routinesid).
 
 #### FileCreateBtn
 - Encargado de crear una carpeta de rutinas.
+- Desplegara un modal para poner el nombre de la rutina y seleccionar que rutinas incluira.
+- Usado en:
+    - [Routines](#routines).
+
+#### ExerciseCreateBtn
+- Encargado de crear un ejercicio personalizado.
+- Tendra en cuenta la cantidad de ejercicios que posee el usuario.
+- En caso de tener 5 ejercicios ya creados y ser usuario gratis desplegara el [premium modal](#premium-modal).
+- PAra crear un ejercicio depsplegara un Modal donde se ingresara la infomracion del ejercicio.
+- Usado en:
+    - [Exercises](#exercises).
 
 #### MeasureChangeButton
 - Encargado de cambiar el measure que se renderiza.
 - Sera un select input.
+- Usado en:
+    - [Measures](#measures).
 
 #### MeasureCreateButton
 - Encargado de crear una nueva measure.
+- Usado en:
+    - [Measures](#measures).
 
 #### MeasureRecordLogButton
 - Encargado de cargar un nuevo registro de la measure.
+- Usado en:
+    - [Measures](#measures).
 
 #### MeasureEditRecordLogButton
 - Encargado de editar un registro de la measure.
+- Usado en:
+    - [MeasureRecordCard](#measurerecordcard).
 
 ### Forms
 #### AuthForm
-- Utiizado en [Login](#login), [Register](#register).
+- Usado en:
+    - [Login](#login).
+    - [Register](#register).
+
+#### RoutineForm
+- Usado en:
+    - [Routines/create](#routinescreate).
+    - [Routines/edir/id](#routineseditid).
 
 ### Cards
+#### ExerciseCard
+- Mostrar informacion general del ejercicio.
+- Nombre, musculo motor y señalizar si es personalizado.
+- Usado en:
+    - [Exercies](#exercises).
+
 #### FileCard
 - Mostrar una carpeta de rutinas.
 - Nombre y numero de rutinas que contiene.
 - Boton para desplegar y ocultar el contenido de la misma.
+- Usado en:
+    - [Rutinas predefinidas](#rutinas-predefinidas).
+    - [Routines](#routines).
 
 #### RoutineCard
 - Mostrar datos generales de una rutina.
 - Nombre, perimeros tres ejercicios, enfoque de la rutina.
 - Boton para iniciar la rutina.
+- Usado en:
+    - [Program](#program).
+    - [Routines](#routines).
+    - [Home](#home).
 
 #### MeasureRecordCard
 - Mostrar el record del measure.
 - Valor con unidades correspondientes de la measure.
 - Fecha del registro.
 - Acciones: Editar registro: [MeasureEditRecordLogButton](#measureeditrecordlogbutton)
+- Usado en:
+    - [Measures](#measures).
 
 #### ProfileInfoCard
 - Mostrar datos generales del usuario.
@@ -669,8 +797,27 @@ type WorkoutRecord = {
     - Varsion de usuario (gratis premium).
     - Username.
     - Total workouts.
+- Usado en:
+    - [Profile](#profile).
 
 #### ProfileGraphsCard
 - Graficos de datos del usuario.
 - Graficos:
     - Workouts/semana.
+- Usado en:
+    - [Profile](#profile).
+
+
+#### WorkoutRecordCard
+- Mostrar datos generales de un workout.
+- Usado en:
+    - [History](#history).
+    - [Exercises/id](#exercisesid).
+
+### Modals
+- Todos los modals incluyen el boton que controla su activacion.
+#### Premium modal
+- Sera un elemeto con children donde podras poner lo que se desea como contenido del boton.
+- El modal incluira infomacion de los planes de pago, y acceso a la pagina de [cambio de plan](#premium).
+- Usado en:
+    - [ExerciseCreateBtn](#exercisecreatebtn).
