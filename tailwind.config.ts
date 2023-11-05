@@ -23,10 +23,6 @@ const config: Config = {
         'light-1': '#FFFFFF',
         'light-2': '#9e9e9e',
         'light-3': '#6e6e6e',
-        'blue-1': '#6e6e6e',
-        'blue-2': '#6e6e6e',
-        'blue-3': '#6e6e6e',
-        'blue-hover': '#3b94ec',
         'red-1': '#ba1a1a'
       }
     },

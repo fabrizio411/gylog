@@ -1,6 +1,6 @@
 const Home = () => {
   return (
-    <main>Home</main>
+    <main className='bg-slate-600'>Home</main>
   )
 }
 
