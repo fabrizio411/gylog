@@ -14,6 +14,14 @@
     .text-input {
         @apply bg-transparent placeholder:text-light-3 text-light-1 outline-none border-b border-dark-border focus:border-light-3 hover:border-light-3
     }
+
+    .nav-item {
+        @apply flex flex-col items-center text-xs uppercase text-light-2 fill-light-2 hover:text-green-500 hover:fill-green-500 flex-1
+    }
+
+    .current-page {
+        @apply text-green-500 fill-green-500 flex-1
+    }
 }
 
 html, body {

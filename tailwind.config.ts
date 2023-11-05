@@ -16,7 +16,7 @@ const config: Config = {
       colors: {
         'dark-1': '#101010',
         'dark-2': '#181818',
-        'dark-darker': '#0f0f0f',
+        'dark-3': '#0f0f0f',
         'dark-hover': '#252525',
         'dark-border': '#4b4b4b',
         'dark-border-2': '#1e1e1e',

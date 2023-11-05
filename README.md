@@ -551,8 +551,17 @@ type WorkoutRecord = {
 ## Maquetacion de la web
 ### Codigos de diseño y desarrollo
 - Colores:
+    - Background: #101010, #181818, #0f0f0f (hover: #252525). (dark grey)
+    - Borders: #4b4b4b, #1e1e1e. (grey)
+    - Text: #FFFFFF, #9e9e9e, #6e6e6e. (white)
+    - Errors: #ba1a1a (red).
+    - Deteils: tailwind-green:
+        - Bachfounds: 900 (hover: 700).
+        - Text: 700 (hover: 500).
 - Fuentes:
-- Tamaños:
+- Tamaños: 
+    - Auth form: w-80.
+
 #### Auth
 - [Login](#login) y [register](#register).
 - Paginas de login y registro.
@@ -562,6 +571,7 @@ type WorkoutRecord = {
 - '/login'
 - Pagina para ingresar un usuario.
 - Se utilizara [NextAuth](#librerias) para la validacion del usuario y la creacion de la sesion.
+- Forumulario en componente [AuthForm](#authform).
 - Se pedira Email y Password para el ingreso.
 - Corroborar que lo ingresado tenga un formato de email, en caso contrario desabilitar el boton.
 - Los errores del formulario se mostraran debajo de cada input.
@@ -572,6 +582,7 @@ type WorkoutRecord = {
 - '/register'
 - Pagina para regsitrar usuario.
 - Se utilizara [NextAuth](#librerias) para la validacion del usuario y la creacion de la sesion.
+- Forumulario en componente [AuthForm](#authform).
 - Se pedira Email, Username, password y se podra agregar una imagen de perfil.
 - Para poder enviar se corroborara que el username y el email no exitan y que este ultimo sea un formato email valido.
 - Los errores del formulario se mostraran debajo de cada input.

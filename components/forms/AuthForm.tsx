@@ -1,6 +1,6 @@
 'use client'
 
-import Link from "next/link"
+import Link from 'next/link'
 
 interface AuthFormProps {
   variant: 'LOGIN' | 'REGISTER'
@@ -22,7 +22,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
         <p className='text-light-2 text-sm'>
           {variant === 'LOGIN' ? "Don't have an account?" : 'Already have an account?'}
         </p>
-        <Link className='text-green-600 text-sm hover:underline' href={variant === 'LOGIN' ? '/register' : '/login'}>
+        <Link className='text-green-700 text-sm hover:underline hover:text-green-500' href={variant === 'LOGIN' ? '/register' : '/login'}>
           {variant === 'LOGIN' ? 'Register' : 'Login'}
         </Link>
       </div>
