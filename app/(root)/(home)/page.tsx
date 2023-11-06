@@ -1,7 +1,7 @@
-const Home = () => {
+const HomePage = () => {
   return (
-    <main className='bg-slate-600'>Home</main>
+    <main className='bg-slate-600'>HomePage</main>
   )
 }
 
-export default Home
+export default HomePage
