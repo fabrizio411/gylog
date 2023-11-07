@@ -17,7 +17,7 @@ const config: Config = {
         'dark-1': '#101010',
         'dark-2': '#181818',
         'dark-3': '#0f0f0f',
-        'dark-hover': '#252525',
+        'dark-hover': '#1d1d1d',
         'dark-border': '#4b4b4b',
         'dark-border-2': '#1e1e1e',
         'light-1': '#FFFFFF',

@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={`${inter.className} bg-dark-1 flex flex-col items-center`}>
 
-        <header className='w-full h-16 flex justify-center fixed bottom-0 sm:static'>
+        <header className='bg-dark-1 w-full h-16 flex justify-center fixed bottom-0 sm:static'>
           <Nav />
           <Link href='/' className='text-green-700 hover:text-green-500 text-3xl font-bold absolute top-4 left-4 hidden sm:block'>GYLOG</Link>
         </header>
