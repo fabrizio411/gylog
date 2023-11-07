@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @layer components {
-    .main {
-        @apply text-xl
+    .main-container {
+        @apply w-full sm:w-[700px] mt-12 sm:mt-5
     }
 
     .button {

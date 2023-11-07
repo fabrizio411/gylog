@@ -594,7 +594,7 @@ type WorkoutRecord = {
 - Pagina de inicio.
 - Al hacer login o register se redireccionara a esta pagina. Igual que al hacer click en el logo.
 - Se mostrara:
-    - El programa semanal, sin las rutinas, pero con los dias ya completados marcados.
+    - El [programa semanal](#programcard), sin las rutinas, pero con los dias ya completados marcados.
     - Este dara acceso al [programa](#program).
     - Las [rutunas pendientes](#routinecard) para el dia.
     - Acceso a [configuracion](#configuracion).
@@ -800,6 +800,10 @@ type WorkoutRecord = {
 - Acciones: Editar registro: [MeasureEditRecordLogButton](#measureeditrecordlogbutton)
 - Usado en:
     - [Measures](#measures).
+
+#### ProgramCard
+- Mostrar representados los dias de la semana y cuales estan realizados.
+- Al hacer click lleva a la pagina del [program](#program).
 
 #### ProfileInfoCard
 - Mostrar datos generales del usuario.

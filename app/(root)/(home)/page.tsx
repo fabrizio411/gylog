@@ -1,6 +1,10 @@
+import ProgramCard from '@/components/cards/ProgramCard'
+
 const HomePage = () => {
   return (
-    <main className='bg-slate-600'>HomePage</main>
+    <main className='main-container flex flex-col items-center'>
+      <ProgramCard />
+    </main>
   )
 }
 
