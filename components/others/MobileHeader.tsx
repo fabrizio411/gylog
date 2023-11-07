@@ -7,7 +7,12 @@ const MobileHeader = () => {
   const pathname = usePathname()
   const router = useRouter()
   
-  const mainPages = ['/routines', '/', '/measures', 'profile']
+  const mainPages = ['/routines', '/', '/measures', '/profile']
+
+  let titleText = 'GYLOG'
+  if (pathname === '/routines') titleText = 'ROUTINES'
+  if (pathname === '/measures') titleText = 'MEASURES'
+  if (pathname === '/profile') titleText = 'PROFILE'
 
   return (
     <div className='sm:hidden flex justify-center items-center absolute top-0 w-full bg-dark-1 p-2'>
@@ -16,7 +21,7 @@ const MobileHeader = () => {
           <BackArrow className='scale-150 fill-green-900' />
         </div>
       ) : null}
-      <h1 className='text-2xl text-green-700 font-bold'>GYLOG</h1>
+      <h1 className='text-2xl text-green-700 font-bold'>{titleText}</h1>
     </div>
   )
 }

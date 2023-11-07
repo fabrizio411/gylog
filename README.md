@@ -568,6 +568,7 @@ type WorkoutRecord = {
 - Seran dos paginas separadas que utilizaran un mismo [formulario (AuthForm)](#authform).
 
 #### Login
+- [file](./app/(auth)/login/page.tsx).
 - '/login'
 - Pagina para ingresar un usuario.
 - Se utilizara [NextAuth](#librerias) para la validacion del usuario y la creacion de la sesion.
@@ -579,6 +580,7 @@ type WorkoutRecord = {
 - Al ingresar se redireccionara a [Home](#home)
 
 #### Register
+- [file](./app/(auth)/register/page.tsx).
 - '/register'
 - Pagina para regsitrar usuario.
 - Se utilizara [NextAuth](#librerias) para la validacion del usuario y la creacion de la sesion.
@@ -590,6 +592,7 @@ type WorkoutRecord = {
 - Al registrar se redireccionara a [Home](#home)
 
 #### Home
+- [file](./app/(root)/(home)/page.tsx).
 - '/'
 - Pagina de inicio.
 - Al hacer login o register se redireccionara a esta pagina. Igual que al hacer click en el logo.
@@ -600,6 +603,7 @@ type WorkoutRecord = {
     - Acceso a [configuracion](#configuracion).
 
 #### Routines
+- [file](./app/(root)/routines/page.tsx).
 - '/routines'
 - Acciones: 
     - [Crear rutina](#routinescreate).
@@ -611,16 +615,19 @@ type WorkoutRecord = {
     - Acceso a las carpetas de [rutinas prefedinidas](#rutinas-predefinidas).
 
 #### Routines/create
+- [file](./app/(root)/routines/create/page.tsx).
 - '/routines/create'
 - Encargada de crear una rutina
 - Usara [RoutineForm](#routineform) para la informacion de la rutina.
 
 #### Routines/edit/id
+- [file](./app/(root)/routines/edit/[id]/page.tsx).
 - '/routines/edit/:id'
 - Encargada de editar una rutina.
 - Usara [RoutineForm](#routineform) con los datos de la rutina ya cargados para la informacion de la rutina.
 
 #### Routines/id
+- [file](./app/(root)/routines/[id]/page.tsx).
 - '/routines/:id'
 - Mostrara la informacion completa de la rutina.
 - Acciones: 
@@ -629,11 +636,13 @@ type WorkoutRecord = {
     - Compartir rutina: [ShareContentBtn](#sharecontentbtn)
 
 #### Rutinas predefinidas
+- [file](./app/(root)/routines/explore/page.tsx).
 - '/routines/explore'
 - Incluira una lista con las [carpetas](#filecard) de las rutinas predefinidas.
 - Las rutinas se podran acceder y agregar a tus rutinas: [RoutineCreateBtn].
 
 #### Exercises
+- [file](./app/(root)/exercises/page.tsx).
 - '/exercises'
 - Se mostrara una lista de [ejercicios](#exercisecard). 
 - Contiene los ejercicios generales y los creados por el usuario ordenados alfabeticamente.
@@ -643,12 +652,14 @@ type WorkoutRecord = {
     - Boton para crear ejercicios: [ExerciseCreateBtn](#exercisecreatebtn)
 
 #### Exercises/id
+- [file](./app/(root)/exercises/[id]/page.tsx).
 - '/exercises/:id'
 - Se mostrara toda la ifnormacion del ejercicio junto con las estadisticas del mismo
 - Habra tambien una pestaña de historial, donde se mostaran los [workouts](#workoutrecordcard) que le lo incluyen.
 - Compartir ejercicio personalizado: [ShareContentBtn](#sharecontentbtn)
 
 #### Measures
+- [file](./app/(root)/measures/page.tsx).
 - '/measures'
 - Se cargara siempre el measure de bodyweight inicialmente.
 - Acciones:
@@ -660,6 +671,7 @@ type WorkoutRecord = {
     - Los records del measure ordenados por fecha: [MeasureRecordCard](#measurerecordcard)
 
 #### Profile
+- [file](./app/(root)/profile/page.tsx).
 - '/profile'
 - Perfil del usuario
 - Se mostrara:
@@ -670,6 +682,7 @@ type WorkoutRecord = {
     - Acceso a [subscripcion](#premium-modal) en caso de no ser premium.
 
 #### Program
+- [file](./app/(root)/program/page.tsx).
 - '/program'
 - Programa del usuario.
 - Se mostrara una lista de todos los dias con las [rutinas](#routinecard) de los mismos.
@@ -679,6 +692,7 @@ type WorkoutRecord = {
     - Agregar rutinas a un dia.
 
 #### Workout/id
+- [file](./app/(root)/workout/[id]/page.tsx).
 - '/workout/:id'
 - Pagina dinamica.
 - Contiene toda la informacion de el workout del id.
@@ -686,11 +700,13 @@ type WorkoutRecord = {
 
 
 #### History
+- [file](./app/(root)/history/page.tsx).
 - '/history'
 - Mostrara una lista con todos los [entrenamientos](#workoutrecordcard) del usuario ordenados por fecha.
 - A traves de esots se podra acceder a la pagina del [workout](#workoutid) para tener la infomacion completa del mismo.
 
 #### Configuracion
+- [file](./app/(root)/settings/page.tsx).
 - '/settings'
 - Configuracion de la aplicacion y de la cuenta.
 - Acciones: 
@@ -698,15 +714,23 @@ type WorkoutRecord = {
     - Cambair unidades.
 
 #### Premium
+- [file](./app/(root)/premium/page.tsx).
 - '/premium'
 - Pagina de cambo de plan.
 
 ## Componentes 
 ### Nav
-- Home: (Icono: )
-- Profile: (Icono: )
-- Routines: (Icono: )
-- Measures: (Icono: )
+- [file](./components/others/Nav.tsx).
+- Home: ([Icono](./components/icons/HomeIcon.tsx))
+- Profile: ([Icono](./components/icons/ProfileIcon.tsx))
+- Routines: ([Icono](./components/icons/DumbbellIcon.tsx))
+- Measures: ([Icono](./components/icons/RulerIcon.tsx))
+- Boton para ir atras en caso de no ser una de las paginas principales ([Icono](./components/icons/BackArrow.tsx)).
+
+### MobileHeader
+- [file](./components/others/MobileHeader.tsx).
+- Header para la version de movil.
+- Boton para ir atras en caso de no ser una de las paginas principales ([Icono](./components/icons/BackArrow.tsx)).
 
 ### Actions
 #### ShareContentBtn
@@ -760,6 +784,7 @@ type WorkoutRecord = {
 
 ### Forms
 #### AuthForm
+- [file](./components/forms/AuthForm.tsx).
 - Usado en:
     - [Login](#login).
     - [Register](#register).
@@ -802,6 +827,7 @@ type WorkoutRecord = {
     - [Measures](#measures).
 
 #### ProgramCard
+- [file](./components/cards/ProgramCard.tsx).
 - Mostrar representados los dias de la semana y cuales estan realizados.
 - Al hacer click lleva a la pagina del [program](#program).
 
