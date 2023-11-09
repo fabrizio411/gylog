@@ -1,4 +1,5 @@
 import ProfileInfoCard from '@/components/cards/ProfileInfoCard'
+import Link from 'next/link'
 
 const ProfilePage = () => {
   return (
@@ -6,12 +7,12 @@ const ProfilePage = () => {
       <ProfileInfoCard />
       <div className='flex flex-col gap-2 w-11/12 sm:w-full mt-6'>
         <div className='flex gap-2'>
-          <button className='profile-button'>Exercises</button>
-          <button className='profile-button'>History</button>
+          <Link href='/exercises' className='profile-button'>Exercises</Link>
+          <Link href='/history' className='profile-button'>History</Link>
         </div>
         <div className='flex gap-2'>
-          <button className='profile-button'>Measures</button>
-          <button className='profile-button'>Program</button>
+          <Link href='/measures' className='profile-button'>Measures</Link>
+          <Link href='/program' className='profile-button'>Program</Link>
         </div>
       </div>
     </main>

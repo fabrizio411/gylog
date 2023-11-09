@@ -39,6 +39,7 @@
     .profile-button {
         @apply
         flex-1
+        text-center
         bg-dark-2 border
         border-dark-border
         rounded-lg
