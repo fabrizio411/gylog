@@ -803,7 +803,7 @@ type WorkoutRecord = {
     - [Exercies](#exercises).
 
 #### FileCard
-- [file](./components/cards/RoutineCard.tsx).
+- [file](./components/cards/FileCard.tsx).
 - Mostrar una carpeta de rutinas.
 - Nombre y numero de rutinas que contiene.
 - Boton para desplegar y ocultar el contenido de la misma.
@@ -812,6 +812,7 @@ type WorkoutRecord = {
     - [Routines](#routines).
 
 #### RoutineCard
+- [file](./components/cards/RoutineCard.tsx).
 - Mostrar datos generales de una rutina.
 - Nombre, perimeros tres ejercicios, enfoque de la rutina.
 - Boton para iniciar la rutina.

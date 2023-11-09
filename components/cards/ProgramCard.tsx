@@ -1,11 +1,17 @@
 import Link from 'next/link'
+import EditIcon from '../icons/EditIcon'
 
 const ProgramCard = () => {
   const days = ['m', 't', 'w', 't', 'f', 's', 's']
 
   return (
     <Link href='/program' className=' group block bg-dark-2 border border-dark-border hover:border-green-700 p-3 pb-5 rounded-lg w-11/12 sm:w-full'>
-      <h2 className='text-light-1 sm:text-lg font-bold mb-3'>My program</h2>
+      <div className='flex justify-between'>
+        <h2 className='text-light-1 sm:text-lg font-bold mb-3'>My program</h2>
+        <div>
+          <EditIcon className='fill-light-2 group-hover:fill-light-1' />
+        </div>
+      </div>
       <div className='flex justify-around w-full'>
         {days.map((day, i) => (
           <div key={i} className='flex flex-col items-center gap-2'>
