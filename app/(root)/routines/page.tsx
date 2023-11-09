@@ -1,12 +1,13 @@
 import FileCard from '@/components/cards/FileCard'
 import RoutineCard from '@/components/cards/RoutineCard'
+import Link from 'next/link'
 
 const RoutinesPage = () => {
   return (
     <main className='main-container'>
       <div className='flex justify-center sm:justify-between items-center'>
         <h2 className='desktop-page-title'>Routines</h2>
-        <button className='button w-11/12 sm:w-auto mt-2 sm:mt-0'>Create routine</button>
+        <Link href='/routines/create' className='button w-11/12 sm:w-auto mt-2 sm:mt-0'>Create routine</Link>
       </div>
       <div className='routines-container mt-5 sm:mt-3'>
         <>
