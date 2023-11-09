@@ -2,6 +2,8 @@
 
 import { usePathname, useRouter } from 'next/navigation'
 import BackArrow from '../icons/BackArrow'
+import Link from 'next/link'
+import SettingsIcon from '../icons/SettingsIcon'
 
 const MobileHeader = () => {
   const pathname = usePathname()
@@ -15,13 +17,18 @@ const MobileHeader = () => {
   if (pathname === '/profile') titleText = 'PROFILE'
 
   return (
-    <div className='sm:hidden flex justify-center items-center absolute top-0 w-full bg-dark-1 p-2'>
+    <div className='sm:hidden flex justify-center items-center fixed z-50 top-0 w-full bg-dark-1 p-2'>
       {!mainPages.includes(pathname) ? (
         <div className='absolute top-1/2 -translate-y-1/2 left-3' onClick={() => router.back()}>
           <BackArrow className='scale-150 fill-green-900' />
         </div>
       ) : null}
       <h1 className='text-2xl text-green-700 font-bold'>{titleText}</h1>
+      {pathname === '/profile' ? (
+        <Link href='/settings' className='absolute top-1/2 -translate-y-1/2 right-3 '>
+          <SettingsIcon className='fill-light-2' />
+        </Link>
+      ) : null}
     </div>
   )
 }

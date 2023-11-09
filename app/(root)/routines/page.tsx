@@ -5,7 +5,7 @@ const RoutinesPage = () => {
   return (
     <main className='main-container'>
       <div className='flex justify-center sm:justify-between items-center'>
-        <h2 className='hidden sm:block text-light-1 text-2xl font-bold ml-4'>Routines</h2>
+        <h2 className='desktop-page-title'>Routines</h2>
         <button className='button w-11/12 sm:w-auto mt-2 sm:mt-0'>Create routine</button>
       </div>
       <div className='routines-container mt-5 sm:mt-3'>

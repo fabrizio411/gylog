@@ -835,12 +835,11 @@ type WorkoutRecord = {
 - Al hacer click lleva a la pagina del [program](#program).
 
 #### ProfileInfoCard
+- [file](./components/cards/ProfileInfoCard.tsx).
 - Mostrar datos generales del usuario.
 - Datos:
     - Fehca de creacion.
-    - Varsion de usuario (gratis premium).
     - Username.
-    - Total workouts.
 - Usado en:
     - [Profile](#profile).
 

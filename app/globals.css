@@ -13,6 +13,16 @@
         sm:pb-7
     }
 
+    .desktop-page-title {
+        @apply
+        hidden
+        sm:block
+        text-light-1
+        text-2xl
+        font-bold
+        ml-4
+    }
+
     .button {
         @apply 
         bg-green-900 
@@ -24,6 +34,18 @@
         pb-2 
         pl-7 
         pr-7
+    }
+
+    .profile-button {
+        @apply
+        flex-1
+        bg-dark-2 border
+        border-dark-border
+        rounded-lg
+        p-2
+        text-light-2
+        hover:text-light-1
+        hover:bg-dark-hover
     }
 
     .text-input {
