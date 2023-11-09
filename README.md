@@ -796,12 +796,14 @@ type WorkoutRecord = {
 
 ### Cards
 #### ExerciseCard
+- [file](./components/cards/FileCard.tsx).
 - Mostrar informacion general del ejercicio.
 - Nombre, musculo motor y señalizar si es personalizado.
 - Usado en:
     - [Exercies](#exercises).
 
 #### FileCard
+- [file](./components/cards/RoutineCard.tsx).
 - Mostrar una carpeta de rutinas.
 - Nombre y numero de rutinas que contiene.
 - Boton para desplegar y ocultar el contenido de la misma.

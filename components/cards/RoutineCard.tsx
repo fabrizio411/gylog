@@ -1,9 +1,13 @@
 import Link from 'next/link'
 import StartIcon from '../icons/StartIcon'
 
-const RoutineCard = () => {
+interface RoutineCardProps {
+  className?: string
+}
+
+const RoutineCard: React.FC<RoutineCardProps> = ({ className }) => {
   return (
-    <Link href='/routines' className='group/card flex rounded-md overflow-hidden w-11/12 sm:w-full'>
+    <Link href='/routines' className={`group/card flex rounded-md overflow-hidden w-11/12 sm:w-full ${className}`}>
       <div className='bg-green-900 group-hover/card:bg-green-700 w-2'></div>
       <div className='flex-1 bg-dark-2 group-hover/card:bg-dark-hover p-3 flex justify-between items-center'>
         <div>

@@ -58,6 +58,14 @@
         fill-green-500 
         flex-1
     }
+
+    .routines-container {
+        @apply
+        flex
+        flex-col
+        items-center
+        gap-3
+    }
 }
 
 html, body {

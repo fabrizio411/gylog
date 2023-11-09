@@ -7,7 +7,7 @@ const HomePage = () => {
       <ProgramCard />
       
       <h3 className='text-xl text-light-1 font-bold ml-7 sm:ml-4 mt-6 self-start'>For today</h3>
-      <div className='flex flex-col items-center gap-3 mt-3 w-full'>
+      <div className='routines-container mt-3 w-full'>
         <RoutineCard />
         <RoutineCard />
       </div>

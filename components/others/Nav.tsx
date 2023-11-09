@@ -13,7 +13,7 @@ const Nav = () => {
   const pathname = usePathname()
   const router = useRouter()
   
-  const mainPages = ['/routines', '/', '/measures', 'profile']
+  const mainPages = ['/routines', '/', '/measures', '/profile']
 
   return (
     <nav className='flex justify-around items-center h-16 w-full sm:w-[700px]'>
