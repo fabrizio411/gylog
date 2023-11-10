@@ -1,6 +1,41 @@
+import ExerciseCard from '@/components/cards/ExerciseCard'
+import SearchIcon from '@/components/icons/SearchIcon'
+import Link from 'next/link'
+
 const ExercisesPage = () => {
   return (
-    <div>ExercisesPage</div>
+    <main className='main-container flex flex-col'>
+      <div className='flex justify-center sm:justify-between items-center'>
+        <h2 className='desktop-page-title'>Exercises</h2>
+        <Link href='/routines/create' className='button w-11/12 sm:w-auto mt-2 sm:mt-0'>Create exercise</Link>
+      </div>
+      <div className='w-11/12 sm:w-full flex gap-2 mt-5 self-center'>
+        <label htmlFor='search' className='relative cursor-text flex-1 bg-dark-3 border border-dark-border rounded-xl p-3'>
+          <input id='search' type='text' placeholder='Search' className='peer pl-10 w-full bg-transparent outline-none text-light-1 placeholder:text-light-3' />
+          <div className='absolute top-1/2 -translate-y-1/2 left-4'>
+            <SearchIcon className='fill-light-3' />
+          </div>
+        </label>
+        <button className='bg-dark-border hover:bg-light-3 text-light-1 pl-5 sm:pl-8 pr-5 sm:pr-8 text-sm sm:text-base rounded-xl'>All muscles</button>
+      </div>
+      <div className='routines-container gap-0 mt-5 sm:mt-3'>
+        <ExerciseCard />
+        <ExerciseCard />
+        <ExerciseCard />
+        <ExerciseCard />
+        <ExerciseCard />
+        <ExerciseCard />
+        <ExerciseCard />
+        <ExerciseCard />
+        <ExerciseCard />
+        <ExerciseCard />
+        <ExerciseCard />
+        <ExerciseCard />
+        <ExerciseCard />
+        <ExerciseCard />
+        <ExerciseCard />
+      </div>
+    </main>
   )
 }
 

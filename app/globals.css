@@ -25,6 +25,7 @@
 
     .button {
         @apply 
+        text-center
         bg-green-900 
         text-light-1 
         hover:bg-green-700 
@@ -39,13 +40,17 @@
     .profile-button {
         @apply
         flex-1
-        text-center
+        flex
+        gap-2
+        justify-center
         bg-dark-2 border
         border-dark-border
         rounded-lg
         p-2
         text-light-2
+        fill-light-2
         hover:text-light-1
+        hover:fill-light-1
         hover:bg-dark-hover
     }
 

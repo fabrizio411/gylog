@@ -1,4 +1,8 @@
 import ProfileInfoCard from '@/components/cards/ProfileInfoCard'
+import DumbbellIcon from '@/components/icons/DumbbellIcon'
+import HistoryIcon from '@/components/icons/HistoryIcon'
+import ProgramIcon from '@/components/icons/ProgramIcon'
+import RulerIcon from '@/components/icons/RulerIcon'
 import Link from 'next/link'
 
 const ProfilePage = () => {
@@ -7,12 +11,24 @@ const ProfilePage = () => {
       <ProfileInfoCard />
       <div className='flex flex-col gap-2 w-11/12 sm:w-full mt-6'>
         <div className='flex gap-2'>
-          <Link href='/exercises' className='profile-button'>Exercises</Link>
-          <Link href='/history' className='profile-button'>History</Link>
+          <Link href='/exercises' className='profile-button'>
+            <DumbbellIcon />
+            Exercises
+          </Link>
+          <Link href='/history' className='profile-button'>
+            <HistoryIcon />
+            History
+          </Link>
         </div>
         <div className='flex gap-2'>
-          <Link href='/measures' className='profile-button'>Measures</Link>
-          <Link href='/program' className='profile-button'>Program</Link>
+          <Link href='/measures' className='profile-button'>
+            <RulerIcon />
+            Measures
+          </Link>
+          <Link href='/program' className='profile-button'>
+            <ProgramIcon />
+            Program
+          </Link>
         </div>
       </div>
     </main>
