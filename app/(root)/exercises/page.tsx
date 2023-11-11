@@ -1,5 +1,6 @@
 import ExerciseCard from '@/components/cards/ExerciseCard'
 import SearchIcon from '@/components/icons/SearchIcon'
+import { musclesArray } from '@/libs/utils/constants'
 import Link from 'next/link'
 
 const ExercisesPage = () => {
@@ -16,7 +17,13 @@ const ExercisesPage = () => {
             <SearchIcon className='fill-light-3' />
           </div>
         </label>
-        <button className='bg-dark-border hover:bg-light-3 text-light-1 pl-5 sm:pl-8 pr-5 sm:pr-8 text-sm sm:text-base rounded-xl'>All muscles</button>
+        <select className='bg-dark-border hover:bg-light-3 text-light-1 pl-5 sm:pl-8 pr-5 sm:pr-8 text-sm sm:text-base rounded-xl appearance-none max-h-40 overflow-y-auto'>
+          <option className='font-sans'>All muscles</option>
+          {musclesArray.map(muscle => (
+            <option className='capitalize font-sans' key={muscle} value={muscle}>{muscle}</option>
+          ))}
+        </select>
+        
       </div>
       <div className='routines-container gap-0 mt-5 sm:mt-3'>
         <ExerciseCard />
