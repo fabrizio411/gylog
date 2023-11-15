@@ -822,6 +822,7 @@ type WorkoutRecord = {
     - [Home](#home).
 
 #### MeasureRecordCard
+- [file](./components/cards/MeasureRecordCard.tsx).
 - Mostrar el record del measure.
 - Valor con unidades correspondientes de la measure.
 - Fecha del registro.
