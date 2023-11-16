@@ -15,6 +15,8 @@ const MobileHeader = () => {
   if (pathname === '/routines') titleText = 'ROUTINES'
   if (pathname === '/measures') titleText = 'MEASURES'
   if (pathname === '/profile') titleText = 'PROFILE'
+  if (pathname === '/exercises') titleText = 'EXERCISES'
+  if (pathname === '/history') titleText = 'HISTORY'
 
   return (
     <div className='sm:hidden flex justify-center items-center fixed z-50 top-0 w-full bg-dark-1 p-2'>

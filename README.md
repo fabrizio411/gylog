@@ -853,6 +853,7 @@ type WorkoutRecord = {
 
 
 #### WorkoutRecordCard
+- [file](./components/cards/WorkoutRecordCard.tsx).
 - Mostrar datos generales de un workout.
 - Usado en:
     - [History](#history).
