@@ -54,7 +54,7 @@ export async function POST(req: Request) {
 
         // Verificar si es usuario grtis y si puede crear mas ejercicios
         if (!user.isPremium && user.exercises.length >= 5) {
-            return NextResponse.json({ message: 'Max exercises created', error: true })
+            return NextResponse.json({ message: 'Max exercises created, get Premium', error: true })
         }
 
         // Crear Exercise
@@ -72,7 +72,7 @@ export async function POST(req: Request) {
             { $push: { exercises: newExercise._id } }
         )
 
-        return NextResponse.json({ message: 'Exercise created', error: true  })
+        return NextResponse.json({ message: 'Exercise created' })
         
     } catch (error) {
         console.log('CREATE_EXERCISE_ERROR', error)

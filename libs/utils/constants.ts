@@ -4,6 +4,6 @@ export const unitsArray = ['kg', 'g', 'mg', 'lbs', 'oz', 'km', 'm', 'cm', 'mm', 
 
 export const exerciseCategoryArray = ['reps', 'reps/weight', 'dur', 'dur/weight', 'dist', 'dist/dur', 'checkbox']
 
-export const musclesArray = ['forearm', 'biceps', 'triceps', 'shoulder', 'traps', 'chest', 'lats', 'lower back', 'abs', 'quadricep', 'hamstrings', 'adductors', 'abductor', 'glutes', 'calves', 'cardio', 'other']
+export const musclesArray = ['forearm', 'biceps', 'triceps', 'shoulder', 'traps', 'chest', 'lats', 'lower back', 'abs', 'quadriceps', 'hamstrings', 'adductors', 'abductor', 'glutes', 'calves', 'cardio', 'other']
 
 export const daysArray = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']

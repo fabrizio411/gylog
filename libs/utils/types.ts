@@ -12,7 +12,7 @@ export type TypeDays = 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun'
 
 export type TypeExerciseCategory = 'reps' | 'reps/weight' | 'dur' | 'dur/weight' | 'dist' | 'dist/dur' | 'checkbox'
 
-export type TypeMuscles = 'forearm' | 'biceps' | 'triceps' | 'shoulder' | 'traps' | 'chest' | 'lats' | 'lower back' | 'abs' | 'quadricep' | 'hamstrings' | 'adductors' | 'abductor' | 'glutes' | 'calves' | 'cardio' | 'other'
+export type TypeMuscles = 'forearm' | 'biceps' | 'triceps' | 'shoulder' | 'traps' | 'chest' | 'lats' | 'lower back' | 'abs' | 'quadriceps' | 'hamstrings' | 'adductors' | 'abductor' | 'glutes' | 'calves' | 'cardio' | 'other'
 
 export type TypeUser = {
     _id: string | any,

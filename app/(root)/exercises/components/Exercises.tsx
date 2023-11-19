@@ -10,9 +10,10 @@ const Exercises = () => {
 
   useEffect(() => {
     async function getExercises() {
-      const response : any = await axios.get('/api/exercises')
-      .then(() => setExercises(response.data))
+      const res: any = await axios.get('/api/exercises')
       .catch((error) => console.log(error))
+      
+      setExercises(res.data)
     }
 
     getExercises()

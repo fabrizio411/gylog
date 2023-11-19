@@ -4,13 +4,16 @@ import { musclesArray } from '@/libs/utils/constants'
 import Link from 'next/link'
 import Exercises from './components/Exercises'
 import CreateExercise from '@/components/actions/CreateExercise'
+import getUser from '@/libs/utils/getUser'
 
-const ExercisesPage = () => {
+const ExercisesPage = async () => {
+  const user = await getUser()
+
   return (
     <main className='main-container flex flex-col'>
       <div className='flex justify-center sm:justify-between items-center'>
         <h2 className='desktop-page-title'>Exercises</h2>
-        <CreateExercise />
+        <CreateExercise userId={user._id.toString()} />
       </div>
       <div className='w-11/12 sm:w-full flex gap-2 mt-5 self-center'>
         <label htmlFor='search' className='relative cursor-text flex-1 bg-dark-3 border border-dark-border rounded-xl p-3'>

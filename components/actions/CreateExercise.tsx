@@ -6,8 +6,15 @@ import { useState } from 'react'
 import { useForm, FieldValues, SubmitHandler } from 'react-hook-form'
 import ModalLayout from '../others/ModalLayout'
 
-const CreateExercise = () => {
+interface CreateExerciseProps {
+  userId: string
+}
+
+const CreateExercise: React.FC<CreateExerciseProps> = ({
+  userId
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [error, setError] = useState<string>('')
 
   const handleOpen = () => {
     if (isOpen) setIsOpen(false)
@@ -28,7 +35,20 @@ const CreateExercise = () => {
   }
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data)
+    const res: any = await axios.post('/api/exercises', {
+      ...data,
+      userId 
+    })
+    .catch((err) => {
+      console.log('Create exercise error', err)
+      setError('Error creating exercise')
+    })
+
+    if (res.data?.error) {
+      setError(res.data.message)
+    } else {
+      setIsOpen(false)
+    }
   }
 
   return (
@@ -37,11 +57,14 @@ const CreateExercise = () => {
       <ModalLayout isOpen={isOpen} handleOpen={handleOpen}>
         <form onSubmit={handleSubmit(onSubmit)} className='modal-content flex flex-col items-center'>
           <h3 className='desktop-page-title block text-green-700'>Create Exercise</h3>
-          <input {...register('name')} className='font-semibold text-light-1 mt-6 w-full p-2 placeholder:text-light-3 outline-none bg-transparent border-2 border-green-900 hover:border-green-700 focus:border-green-700 rounded-md' placeholder='Exercise name' />
+          {error ? (
+            <p className='text-sm text-red-1'>{error}</p>
+          ) : null}
+          <input {...register('name')} required className='font-semibold text-light-1 mt-6 w-full p-2 placeholder:text-light-3 outline-none bg-transparent border-2 border-green-900 hover:border-green-700 focus:border-green-700 rounded-md' placeholder='Exercise name' />
           <textarea {...register('note')} className='resize-none bg-transparent outline-none border-2 border-green-900 hover:border-green-700 focus:border-green-700 rounded-md w-full mt-3 h-20 text-light-2 placeholder:text-light-3 p-2' placeholder='Note...'/>
           <div className='mt-6 flex items-center justify-between w-full'>
             <p className='text-light-2 '>Exercise type</p>
-            <select {...register('category')} className='exercise-form-select' defaultValue=''>
+            <select {...register('category')} required className='exercise-form-select' defaultValue=''>
               <option className='exercise-form-option' value='' disabled>Select...</option>
               <option className='exercise-form-option' value='reps/weight'>Weight Reps</option>
               <option className='exercise-form-option' value='reps'>Reps Only</option>
@@ -53,7 +76,7 @@ const CreateExercise = () => {
           </div>
           <div className='mt-6 flex items-center justify-between w-full'>
             <p className='text-light-2 '>Main muscle</p>
-            <select {...register('muscle')} className='exercise-form-select' defaultValue=''>
+            <select {...register('muscle')} required className='exercise-form-select' defaultValue=''>
               <option className='exercise-form-option' value='' disabled>Select...</option>
               {musclesArray.map(muscle => (
                 <option key={muscle} className='exercise-form-option capitalize' value={muscle}>{muscle}</option>
