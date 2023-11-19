@@ -20,7 +20,7 @@ const getUser = async () => {
         
         // Encontrar usuario
         const user = await User.findOne({ email: session.user.email })
-        .select('_id username image units isPremium firstWeekDay')
+        .select('_id username image units isPremium firstWeekDay createdAt')
         
         if (!user) {
             return null

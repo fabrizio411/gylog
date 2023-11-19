@@ -24,7 +24,7 @@ const CreateExercise = () => {
 
   const handleCancel = () => {
     handleOpen()
-    // Reset form
+    reset()
   }
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -38,6 +38,7 @@ const CreateExercise = () => {
         <form onSubmit={handleSubmit(onSubmit)} className='modal-content flex flex-col items-center'>
           <h3 className='desktop-page-title block text-green-700'>Create Exercise</h3>
           <input {...register('name')} className='font-semibold text-light-1 mt-6 w-full p-2 placeholder:text-light-3 outline-none bg-transparent border-2 border-green-900 hover:border-green-700 focus:border-green-700 rounded-md' placeholder='Exercise name' />
+          <textarea {...register('note')} className='resize-none bg-transparent outline-none border-2 border-green-900 hover:border-green-700 focus:border-green-700 rounded-md w-full mt-3 h-20 text-light-2 placeholder:text-light-3 p-2' placeholder='Note...'/>
           <div className='mt-6 flex items-center justify-between w-full'>
             <p className='text-light-2 '>Exercise type</p>
             <select {...register('category')} className='exercise-form-select' defaultValue=''>

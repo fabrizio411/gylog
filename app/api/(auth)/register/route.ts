@@ -43,13 +43,6 @@ export async function POST(req: Request) {
             image,
         })
 
-        ////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////
-        // DEBUG: confirmar si existe _id
-        console.log(newUser._id)
-        ////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////
-
         // Crear el Program y relacionarlo con el usuario
         const newProgram = await Program.create({
             user: newUser._id
