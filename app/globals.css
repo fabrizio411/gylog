@@ -94,6 +94,43 @@
         items-center
         gap-3
     }
+
+    .modal-content {
+        @apply
+        p-5
+        w-11/12
+        sm:w-[500px]
+        absolute
+        top-1/2 
+        left-1/2 
+        -translate-x-1/2 
+        -translate-y-1/2 
+        bg-dark-2 border 
+        border-dark-border 
+        rounded-xl
+    }
+
+    .exercise-form-select {
+        @apply
+        pt-2
+        pb-2
+        pl-2
+        w-5/12
+        text-light-2
+        outline-none 
+        bg-transparent 
+        border-2
+        border-green-900
+        hover:border-green-700
+        focus:border-green-700
+        rounded-md
+    }
+
+    .exercise-form-option {
+        @apply
+        font-sans
+        bg-dark-2
+    }
 }
 
 html, body {

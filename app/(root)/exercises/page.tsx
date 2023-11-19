@@ -2,13 +2,15 @@ import ExerciseCard from '@/components/cards/ExerciseCard'
 import SearchIcon from '@/components/icons/SearchIcon'
 import { musclesArray } from '@/libs/utils/constants'
 import Link from 'next/link'
+import Exercises from './components/Exercises'
+import CreateExercise from '@/components/actions/CreateExercise'
 
 const ExercisesPage = () => {
   return (
     <main className='main-container flex flex-col'>
       <div className='flex justify-center sm:justify-between items-center'>
         <h2 className='desktop-page-title'>Exercises</h2>
-        <Link href='/routines/create' className='button w-11/12 sm:w-auto mt-2 sm:mt-0'>Create exercise</Link>
+        <CreateExercise />
       </div>
       <div className='w-11/12 sm:w-full flex gap-2 mt-5 self-center'>
         <label htmlFor='search' className='relative cursor-text flex-1 bg-dark-3 border border-dark-border rounded-xl p-3'>
@@ -19,29 +21,14 @@ const ExercisesPage = () => {
         </label>
         <select className='bg-dark-border hover:bg-light-3 text-light-1 pl-5 sm:pl-8 pr-5 sm:pr-8 text-sm sm:text-base rounded-xl appearance-none max-h-40 overflow-y-auto'>
           <option className='font-sans'>All muscles</option>
-          {musclesArray.map(muscle => (
-            <option className='capitalize font-sans' key={muscle} value={muscle}>{muscle}</option>
+          {musclesArray.map((muscle, i) => (
+            <option key={i} className='capitalize font-sans' value={muscle}>{muscle}</option>
           ))}
         </select>
         
       </div>
-      <div className='routines-container gap-0 mt-5 sm:mt-3'>
-        <ExerciseCard />
-        <ExerciseCard />
-        <ExerciseCard />
-        <ExerciseCard />
-        <ExerciseCard />
-        <ExerciseCard />
-        <ExerciseCard />
-        <ExerciseCard />
-        <ExerciseCard />
-        <ExerciseCard />
-        <ExerciseCard />
-        <ExerciseCard />
-        <ExerciseCard />
-        <ExerciseCard />
-        <ExerciseCard />
-      </div>
+
+      <Exercises />
     </main>
   )
 }
