@@ -1,11 +1,8 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import '../globals.css'
 import Nav from '@/components/others/Nav'
 import Link from 'next/link'
 import MobileHeader from '@/components/others/MobileHeader'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'GYLOG',
@@ -18,18 +15,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang='en'>
-      <body className={`${inter.className} bg-dark-1 flex flex-col items-center`}>
+    <div className='bg-dark-1 flex flex-col items-center'>
+      <header className='bg-dark-1 w-full h-16 flex justify-center fixed bottom-0 sm:static'>
+        <Nav />
+        <Link href='/' className='text-green-700 hover:text-green-500 text-3xl font-bold absolute top-4 left-4 hidden sm:block'>GYLOG</Link>
+      </header>
 
-        <header className='bg-dark-1 w-full h-16 flex justify-center fixed bottom-0 sm:static'>
-          <Nav />
-          <Link href='/' className='text-green-700 hover:text-green-500 text-3xl font-bold absolute top-4 left-4 hidden sm:block'>GYLOG</Link>
-        </header>
+      <MobileHeader />
 
-        <MobileHeader />
-
-        {children}
-      </body>
-    </html>
+      {children}
+    </div>
   )
 }

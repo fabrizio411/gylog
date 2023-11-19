@@ -24,12 +24,12 @@ export async function POST(req: Request) {
         // Verificar disponibilidad del email y username
         const emailFound = await User.findOne({ email })
         if (emailFound) {
-            throw new Error('Email already in use')
+            return NextResponse.json({ message: 'Email already in use', error: true })
         }
 
         const usernameFound = await User.findOne({ username })
         if (usernameFound) {
-            throw new Error('Username already in use')
+            return NextResponse.json({ message: 'Username already in use', error: true })
         }
 
         // Encriptar password
@@ -57,16 +57,18 @@ export async function POST(req: Request) {
 
         newUser.program = newProgram._id
 
-        await newUser.save()
-
         // Crear la measure general de bodyweight
-        await Measure.create({
+        const newMeasure = await Measure.create({
             name: 'Bodyweight',
             toMeasure: 'weight',
             useUnit: newUser.units.weight,
             records: [],
             user: newUser._id
         })
+
+        newUser.measures.push(newMeasure._id)
+
+        await newUser.save()
 
         return NextResponse.json({ message: 'Sign Up succesfully' })
         

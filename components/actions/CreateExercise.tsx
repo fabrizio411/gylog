@@ -24,6 +24,7 @@ const CreateExercise = () => {
 
   const handleCancel = () => {
     handleOpen()
+    // Reset form
   }
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
