@@ -1,7 +1,6 @@
 import ExerciseCard from '@/components/cards/ExerciseCard'
 import SearchIcon from '@/components/icons/SearchIcon'
 import { musclesArray } from '@/libs/utils/constants'
-import Link from 'next/link'
 import Exercises from './components/Exercises'
 import CreateExercise from '@/components/actions/CreateExercise'
 import getUser from '@/libs/utils/getUser'

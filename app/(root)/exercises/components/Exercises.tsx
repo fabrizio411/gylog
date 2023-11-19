@@ -21,21 +21,15 @@ const Exercises = () => {
 
   return (
     <div className='routines-container gap-0 mt-5 sm:mt-3'>
-      <ExerciseCard />
-      <ExerciseCard />
-      <ExerciseCard />
-      <ExerciseCard />
-      <ExerciseCard />
-      <ExerciseCard />
-      <ExerciseCard />
-      <ExerciseCard />
-      <ExerciseCard />
-      <ExerciseCard />
-      <ExerciseCard />
-      <ExerciseCard />
-      <ExerciseCard />
-      <ExerciseCard />
-      <ExerciseCard />
+      {exercises.map(exercise => (
+        <ExerciseCard 
+          key={exercise._id.toString()}
+          _id={exercise._id.toString()}
+          name={exercise.name}
+          muscle={exercise.muscle}
+          userId={exercise?.user?.toString()}
+        />
+      ))}
     </div>
   )
 }
