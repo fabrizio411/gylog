@@ -6,7 +6,13 @@ export const formatDate = (date: string) => {
     return `${newDate.getDate()}/${newDate.getMonth() + 1}/${newDate.getFullYear()}`
 }
 
-
+export const getParam = (param: string) => {
+    if (Array.isArray(param)) {
+        return param[0]
+      }
+  
+      return param
+}
 
 
 // Hacer cuando hay cambio de toMeasure

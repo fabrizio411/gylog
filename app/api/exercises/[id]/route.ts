@@ -6,14 +6,19 @@ import { TypeExerciseCategory, TypeMuscles } from '@/libs/utils/types'
 import { NextResponse } from 'next/server'
 
 export async function GET(
-    { params }: { 
-        params: { id: string } 
-    }
+    req: Request
 ) {
+
+    console.log("Entra")
+
     try {
         connectDB()
 
-        const exercise = await Exercise.findById(params.id)
+        console.log(req.url)
+
+        const id = req.url.slice(req.url.lastIndexOf('/') + 1)
+
+        const exercise = await Exercise.findById(id)
 
         if (!exercise) {
             return NextResponse.redirect(new URL('/exercises'))
@@ -22,7 +27,7 @@ export async function GET(
         return NextResponse.json(exercise)
         
     } catch (error) {
-        console.log('DELETE_EXERCISE_ERROR', error)
+        console.log('GET_EXERCISE_ERROR', error)
         return new NextResponse('Internal Error', { status: 500 })
     }
 }
