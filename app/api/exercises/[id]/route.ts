@@ -8,13 +8,8 @@ import { NextResponse } from 'next/server'
 export async function GET(
     req: Request
 ) {
-
-    console.log("Entra")
-
     try {
         connectDB()
-
-        console.log(req.url)
 
         const id = req.url.slice(req.url.lastIndexOf('/') + 1)
 
