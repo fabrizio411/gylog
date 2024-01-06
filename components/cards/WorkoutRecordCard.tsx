@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import OptionsDots from '../icons/OptionsDots'
 import { useState } from 'react'
+import BackArrow from '../icons/BackArrow'
 
 type Variant = 'GENERAL' | 'EXERCISE'
 
@@ -24,7 +25,7 @@ const WorkoutRecordCard: React.FC<WorkoutRecordCardProps> = ({ variant }) => {
       <div className='flex justify-between'>
         <div>
           <h3 className='text-light-1 font-bold text-lg'>Routine name</h3>
-          <p className='text-light-3 text-sm'>Friday, 15/11/2023</p>
+          <p className='text-light-3 text-sm'>NOV 11, 2023</p>
         </div>
         {variant === 'GENERAL' ? (
           <div className='cursor-pointer relative'>
@@ -42,21 +43,34 @@ const WorkoutRecordCard: React.FC<WorkoutRecordCardProps> = ({ variant }) => {
               </div>
             </div>
           </div>
-        ) : null}
+        ) : (
+          <BackArrow className='fill-light-1 rotate-180' />
+        )}
       </div>
-
-      <div className='mt-2'>
-        <div className='flex justify-between'>
-          <p className='text-light-1 text-sm'>Exercise</p>
-          <p className='text-light-1 text-sm'>Best set</p>
-        </div>
-        {workoutData.map(item => (
+          
+      {variant === 'GENERAL' ? (
+        <div className='mt-2'>
           <div className='flex justify-between'>
-            <p className='text-xs text-light-2'>3 x Bench press</p>
-            <p className='text-xs text-light-2'>50kg x 12</p>
+            <p className='text-light-1 text-sm'>Exercise</p>
+            <p className='text-light-1 text-sm'>Best set</p>
           </div>
-        ))}
-      </div>
+          {workoutData.map((item, i) => (
+            <div key={i} className='flex justify-between'>
+              <p className='text-xs text-light-2'>3 x Bench press</p>
+              <p className='text-xs text-light-2'>50kg x 12</p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className='mt-2 flex flex-col gap-1'>
+          {workoutData.map((item, i) => (
+            <div key={i} className='flex justify-between'>
+              <p className='text-light-1 bg-dark-border rounded-full h-6 w-6 flex items-center justify-center'>{i + 1}</p>
+              <p className='text-light-2'>20 kg x 16 reps</p>
+            </div>
+          ))}
+        </div>
+      )}
       
     </Link>
   )
