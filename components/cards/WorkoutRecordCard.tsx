@@ -64,7 +64,7 @@ const WorkoutRecordCard: React.FC<WorkoutRecordCardProps> = ({ variant }) => {
       ) : (
         <div className='mt-2 flex flex-col gap-1'>
           {workoutData.map((item, i) => (
-            <div key={i} className='flex justify-between'>
+            <div key={i} className='flex justify-between items-center'>
               <p className='text-light-1 bg-dark-border rounded-full h-6 w-6 flex items-center justify-center'>{i + 1}</p>
               <p className='text-light-2'>20 kg x 16 reps</p>
             </div>
