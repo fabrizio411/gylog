@@ -8,12 +8,15 @@ import OptionsDots from '@/components/icons/OptionsDots';
 import ExrGeneral from '../components/ExrGeneral';
 import ExrCharts from '../components/ExrCharts';
 import ExrHistory from '../components/ExrHistory';
+import { useRouter } from 'next/navigation';
+import ModalLayout from '@/components/others/ModalLayout';
 
 const ExerciseOnePage = ({
   params
 }: {
   params: { id: string }
 }) => {
+  const router = useRouter()
 
   // Get exercise info
   const { id } = params
@@ -31,8 +34,6 @@ const ExerciseOnePage = ({
 
     getExercises()
   }, [exerciseId])
-
-  console.log(exercise)
 
   // Handle menu
   const [isMenuActive, setIsMenuActive] = useState<boolean>(false)
@@ -67,6 +68,28 @@ const ExerciseOnePage = ({
     if (historyActive) setHistoryActive(false)
   }
 
+
+  // Handle delete
+  const [isConfirmationActive, setIsConfirmationActive] = useState<boolean>(false)
+
+  if (isConfirmationActive) {
+    document.body.classList.add('overflow-hidden')
+  } else {
+    document.body.classList.remove('overflow-hidden')
+  }
+
+  const handleConfirmationOpen = () => {
+    if (isConfirmationActive) setIsConfirmationActive(false)
+    else setIsConfirmationActive(true)
+  }
+
+  const handleDelete = () => {
+    axios.delete(`/api/exercises/${exerciseId}`)
+    .catch((err) => console.log(err))
+
+    router.push('/exercises')
+  }
+
   return (
     <main className='main-container'>
       {exercise ? (
@@ -78,7 +101,7 @@ const ExerciseOnePage = ({
               <div className={`${isMenuActive ? 'flex' : 'hidden'} z-10 absolute w-40 right-full top-4 bg-dark-2 flex-col rounded-md overflow-hidden`}>
                 <button className='hover:bg-dark-hover p-3 text-light-3 hover:text-light-1 cursor-pointer'>Edit Exercise</button>
                 {exercise.user ? (
-                  <button className='hover:bg-dark-hover p-3 text-red-1 cursor-pointer'>Delete Exercise</button>
+                  <button onClick={handleConfirmationOpen} className='hover:bg-dark-hover p-3 text-red-1 cursor-pointer'>Delete Exercise</button>
                 ) : null}
               </div>
             </div>
@@ -101,7 +124,7 @@ const ExerciseOnePage = ({
               }} className='lateral-nav-btn'>History</button>
             </div>
 
-            <div>
+            <div className='flex items-center flex-col'>
               {generalActive ? (<ExrGeneral />) : null}
               {chartsActive ? (<ExrCharts />) : null}
               {historyActive ? (<ExrHistory />) : null}
@@ -109,6 +132,19 @@ const ExerciseOnePage = ({
           </div>
         </div>
       ) : null}
+
+      <ModalLayout handleOpen={handleConfirmationOpen} isOpen={isConfirmationActive}>
+        <div className='flex flex-col gap-10 bg-dark-hover rounded-xl p-6 w-10/12 sm:w-[500px]'>
+          <div className='flex flex-col gap-2'>
+            <p className='text-light-1 text-2xl text-center'>Are you shure you want to delete this exercise?</p>
+            <p className='text-light-2 text-center'>This will delete all data asociated, and remove it from your routines.</p>
+          </div>
+          <div className='flex gap-3'>
+            <button onClick={handleConfirmationOpen} className='rounded-md flex-1 p-2 text-light-1 bg-dark-border hover:bg-light-3 cursor-pointer'>Cancel</button>
+            <button onClick={handleDelete} className='rounded-md flex-1 p-2 bg-red-900 hover:bg-red-700 text-light-1'>Delete</button>
+          </div>
+        </div>
+      </ModalLayout>
     </main>
   )
 }

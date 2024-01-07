@@ -6,7 +6,7 @@ import ThrophyIcon from '@/components/icons/ThrophyIcon'
 
 const ExrGeneral = () => {
   return (
-    <div className='lateral-nav-page flex flex-col items-center'>
+    <div className='lateral-nav-page'>
       <div className='w-full'>
         <h2 className='text-light-1'>Personal Records</h2>
         <div className='rounded-lg overflow-hidden flex flex-col gap-1 mt-3'>
@@ -56,8 +56,8 @@ const ExrGeneral = () => {
         </div>
       </div>
 
-      <div className='w-full flex flex-col'>
-        <h2 className='text-light-1 mt-8 mb-3'>Latest Workout</h2>
+      <div className='w-full flex flex-col items-center'>
+        <h2 className='self-start text-light-1 mt-8 mb-3'>Latest Workout</h2>
         <WorkoutRecordCard variant='EXERCISE' />
       </div>
 

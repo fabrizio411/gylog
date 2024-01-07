@@ -28,14 +28,14 @@ export async function GET(
 }
 
 export async function DELETE(
-    { params }: { 
-        params: { id: string } 
-    }
+    req: Request
 ) {
     try {
         connectDB()
 
-        const deletedExercise = await Exercise.findByIdAndDelete(params.id)
+        const id = req.url.slice(req.url.lastIndexOf('/') + 1)
+
+        const deletedExercise = await Exercise.findByIdAndDelete(id)
 
         if (!deletedExercise) {
             return NextResponse.json({ message: 'Error deleting exercise', error: true })
@@ -44,19 +44,19 @@ export async function DELETE(
         // Eliminar id del ejercicio del User
         await User.findByIdAndUpdate(
             deletedExercise.user,
-            { $pull: { exercises: params.id } }
+            { $pull: { exercises: id } }
         )
 
         // Eliminar ejercicio de las rutinas actuales
         const routines = await Routine.find({ 
-            'exercises.exercise': params.id,
+            'exercises.exercise': id,
             user: deletedExercise.user 
         }).select('_id')
 
         for (let i = 0; i < routines.length; i++) {
             await Routine.findByIdAndUpdate(
                 routines[i]._id,
-                { $pull: { exercises: { exercise: params.id } } }
+                { $pull: { exercises: { exercise: id } } }
             )
         }
 

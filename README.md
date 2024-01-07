@@ -1,5 +1,8 @@
 # Documentación
 
+## TODO
+- Problemas para ir para atras en rutas dinamicas
+
 ## FALTA
 - Funciones para estructurar datos para las graficas.
 - En API program, ver forma de verificar si se hizo la rutina del program del dia.
