@@ -90,12 +90,17 @@ const ExerciseOnePage = ({
     router.push('/exercises')
   }
 
+  console.log(exercise)
+
   return (
     <main className='main-container'>
       {exercise ? (
         <div className='flex flex-col items-center mt-3'>
           <div className='flex justify-between items-center md:w-full w-11/12'>
-            <h1 className='text-light-1 text-2xl font-bold'>{exercise.name}</h1>
+            <div className='flex flex-col'>
+              <h1 className='text-light-1 text-2xl font-bold'>{exercise.name}</h1>
+              <p className='text-light-2 uppercase'>{exercise.muscle}</p>
+            </div>
             <div onClick={handleMenu} className='relative'>
               <OptionsDots className='fill-light-1 rounded-full box-content p-1 cursor-pointer hover:bg-dark-hover' />
               <div className={`${isMenuActive ? 'flex' : 'hidden'} z-10 absolute w-40 right-full top-4 bg-dark-2 flex-col rounded-md overflow-hidden`}>
@@ -105,6 +110,12 @@ const ExerciseOnePage = ({
                 ) : null}
               </div>
             </div>
+          </div>
+
+          <div className='self-start mt-6'>
+            {exercise.note ? (
+              <p className='text-light-2 text-sm'>{exercise.note}</p>
+            ) : null}
           </div>
 
           <div className='flex flex-col mt-5 w-full'>
@@ -125,7 +136,7 @@ const ExerciseOnePage = ({
             </div>
 
             <div className='flex items-center flex-col'>
-              {generalActive ? (<ExrGeneral />) : null}
+              {generalActive ? (<ExrGeneral category={exercise.category} />) : null}
               {chartsActive ? (<ExrCharts />) : null}
               {historyActive ? (<ExrHistory />) : null}
             </div>
