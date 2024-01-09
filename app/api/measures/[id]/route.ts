@@ -6,15 +6,15 @@ import { TypeUnits } from '@/libs/utils/types'
 import { NextResponse } from 'next/server'
 
 export async function GET(
-    { params }: {
-        params: { id: string }
-    }
+    req: Request
 ) {
     try {
         connectDB()
 
+        const id = req.url.slice(req.url.lastIndexOf('/') + 1)
+
         // Obtener measure y sus records
-        const measureInfo = await Measure.findById(params.id)
+        const measureInfo = await Measure.findById(id)
         .populate({
             path: 'records',
             model: Measurerecord,
@@ -33,15 +33,15 @@ export async function GET(
 }
 
 export async function DELETE(
-    { params }: {
-        params: { id: string }
-    }
+    req: Request
 ) {
     try {
         connectDB()
 
+        const id = req.url.slice(req.url.lastIndexOf('/') + 1)
+
         // Borrar measure
-        const deletedMeasure = await Measure.findByIdAndDelete(params.id)
+        const deletedMeasure = await Measure.findByIdAndDelete(id)
 
         if (!deletedMeasure) {
             return NextResponse.json({ message: 'Error deleting measure', error: true })
