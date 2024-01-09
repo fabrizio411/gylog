@@ -3,9 +3,17 @@
 import ExerciseCard from '@/components/cards/ExerciseCard'
 import { TypeExercise } from '@/libs/utils/types'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
-const Exercises = () => {
+interface ExerciseProps {
+  isComplete: boolean,
+  setIsComplete: Dispatch<SetStateAction<boolean>>
+}
+
+const Exercises: React.FC<ExerciseProps> = ({
+  isComplete,
+  setIsComplete
+}) => {
   const [exercises, setExercises] = useState<TypeExercise[]>([])
 
   useEffect(() => {
@@ -17,7 +25,9 @@ const Exercises = () => {
     }
 
     getExercises()
-  }, [])
+
+    setIsComplete(false)
+  }, [isComplete, setIsComplete])
 
   return (
     <div className='routines-container gap-0 mt-5 sm:mt-3'>

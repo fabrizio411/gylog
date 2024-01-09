@@ -10,6 +10,7 @@ import ExrCharts from '../components/ExrCharts';
 import ExrHistory from '../components/ExrHistory';
 import { useRouter } from 'next/navigation';
 import ModalLayout from '@/components/others/ModalLayout';
+import CreateExercise from '@/components/actions/CreateExercise';
 
 const ExerciseOnePage = ({
   params
@@ -17,6 +18,19 @@ const ExerciseOnePage = ({
   params: { id: string }
 }) => {
   const router = useRouter()
+
+  // Handle edit
+  const [isEditOpen, setIsEditOpen] = useState<boolean>(false)
+  const [isComplete, setIsComplete] = useState<boolean>(false)
+
+  const handleEditOpen = () => {
+    if (isEditOpen) setIsEditOpen(false)
+    else setIsEditOpen(true)
+  }
+
+  const handleComplete = () => {
+    setIsComplete(true)
+  }
 
   // Get exercise info
   const { id } = params
@@ -33,7 +47,9 @@ const ExerciseOnePage = ({
     }
 
     getExercises()
-  }, [exerciseId])
+
+    setIsComplete(false)
+  }, [exerciseId, isComplete, setIsComplete])
 
   // Handle menu
   const [isMenuActive, setIsMenuActive] = useState<boolean>(false)
@@ -90,8 +106,6 @@ const ExerciseOnePage = ({
     router.push('/exercises')
   }
 
-  console.log(exercise)
-
   return (
     <main className='main-container'>
       {exercise ? (
@@ -101,15 +115,15 @@ const ExerciseOnePage = ({
               <h1 className='text-light-1 text-2xl font-bold'>{exercise.name}</h1>
               <p className='text-light-2 uppercase'>{exercise.muscle}</p>
             </div>
-            <div onClick={handleMenu} className='relative'>
-              <OptionsDots className='fill-light-1 rounded-full box-content p-1 cursor-pointer hover:bg-dark-hover' />
-              <div className={`${isMenuActive ? 'flex' : 'hidden'} z-10 absolute w-40 right-full top-4 bg-dark-2 flex-col rounded-md overflow-hidden`}>
-                <button className='hover:bg-dark-hover p-3 text-light-3 hover:text-light-1 cursor-pointer'>Edit Exercise</button>
-                {exercise.user ? (
+            {exercise.user ? (
+              <div onClick={handleMenu} className='relative'>
+                <OptionsDots className='fill-light-1 rounded-full box-content p-1 cursor-pointer hover:bg-dark-hover' />
+                <div className={`${isMenuActive ? 'flex' : 'hidden'} z-10 absolute w-40 right-full top-4 bg-dark-2 flex-col rounded-md overflow-hidden`}>
+                  <button onClick={handleEditOpen} className='hover:bg-dark-hover p-3 text-light-3 hover:text-light-1 cursor-pointer'>Edit Exercise</button>
                   <button onClick={handleConfirmationOpen} className='hover:bg-dark-hover p-3 text-red-1 cursor-pointer'>Delete Exercise</button>
-                ) : null}
+                </div>
               </div>
-            </div>
+            ) : null}
           </div>
 
           <div className='self-start mt-6'>
@@ -156,6 +170,9 @@ const ExerciseOnePage = ({
           </div>
         </div>
       </ModalLayout>
+
+      <CreateExercise variant='EDIT' userId='' exercise={exercise} openHandler={handleEditOpen} isEditOpen={isEditOpen} handleComplete={handleComplete} />
+
     </main>
   )
 }

@@ -1,13 +1,11 @@
 'use client'
 
 import WorkoutRecordCard from '@/components/cards/WorkoutRecordCard'
-import DumbbellIcon from '@/components/icons/DumbbellIcon'
 import GraphIcon from '@/components/icons/GraphIcon'
-import RepsIcon from '@/components/icons/RepsIcon'
 import ThrophyIcon from '@/components/icons/ThrophyIcon'
 import useUnits from '@/hooks/useUnits'
 import { TypeExerciseCategory } from '@/libs/utils/types'
-import { getExerciseUnits, isWeightedExercise } from '@/libs/utils/utils'
+import { isWeightedExercise } from '@/libs/utils/utils'
 
 interface ExrGeneralProps {
   category: TypeExerciseCategory

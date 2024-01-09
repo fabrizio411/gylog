@@ -22,18 +22,6 @@ export const isWeightedExercise = (category: TypeExerciseCategory) => {
     return false
 }
 
-export const getExerciseUnits = (category: TypeExerciseCategory) => {
-    if (category === 'checkbox') return []
-    else if (category === 'dist') return ['m']
-    else if (category === 'dist/dur') return ['m', 's']
-    else if (category === 'dur') return ['s']
-    else if (category === 'dur/weight') return ['s', 'kg']
-    else if (category === 'reps') return ['reps']
-    else if (category === 'reps/weight') return ['reps', 'kg']
-    else return []
-}
-
-
 // Hacer cuando hay cambio de toMeasure
 
 // export const convertUnits = ({

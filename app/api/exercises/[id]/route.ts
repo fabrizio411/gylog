@@ -70,23 +70,20 @@ export async function DELETE(
 
 export async function PUT(
     req: Request,
-    { params }: { 
-        params: { id: string } 
-    }
 ) {
+    const id = req.url.slice(req.url.lastIndexOf('/') + 1)
+
     const {
         name,
         note, 
-        category, 
         muscle, 
     }: {
         name: string,
         note: string,
-        category: TypeExerciseCategory,
         muscle: TypeMuscles,
     } = await req.json()
 
-    if (!name || !category || !muscle) {
+    if (!name || !muscle) {
         return NextResponse.json({ message: 'Missing info' })
     }
 
@@ -95,11 +92,10 @@ export async function PUT(
 
         // Update Exercise
         const updatedExercise = await Exercise.findByIdAndUpdate(
-            params.id,
+            id,
             {
                 name,
                 note,
-                category,
                 muscle,
             },
             { new: true }
