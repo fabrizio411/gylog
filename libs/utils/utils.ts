@@ -1,4 +1,4 @@
-import { TypeExerciseCategory, TypeUnits } from './types'
+import { TypeExerciseCategory, TypeToMeasure, TypeUnits } from './types'
 
 export const formatDate = (date: string) => {
     const newDate = new Date(date)
@@ -20,6 +20,22 @@ export const isWeightedExercise = (category: TypeExerciseCategory) => {
     }
 
     return false
+}
+
+export const getPossibleUnits = (toMeasure: TypeToMeasure) => {
+    let units: TypeUnits[] = []
+
+    if (toMeasure === 'calories') {
+        units = ['kcal']
+    } else if (toMeasure === 'length') {
+        units = ['km', 'm', 'cm', 'mm']
+    } else if (toMeasure === 'percentage') {
+        units = ['%']
+    } else if (toMeasure === 'weight') {
+        units = ['kg', 'g', 'mg']
+    }
+
+    return units
 }
 
 // Hacer cuando hay cambio de toMeasure

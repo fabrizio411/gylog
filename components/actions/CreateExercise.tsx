@@ -109,7 +109,7 @@ const CreateExercise: React.FC<CreateExerciseProps> = ({
           {error ? (
             <p className='text-sm text-red-1'>{error}</p>
           ) : null}
-          <input {...register('name')} required className='font-semibold text-light-1 mt-6 w-full p-2 placeholder:text-light-3 outline-none bg-transparent border-2 border-green-900 hover:border-green-700 focus:border-green-700 rounded-md' placeholder='Exercise name' />
+          <input {...register('name')} required className='font-semibold text-light-1 mt-6 w-full p-2 placeholder:text-light-3 outline-none bg-transparent border-2 border-green-900 hover:border-green-700 focus:border-green-700 rounded-md' placeholder='Exercise Name' />
           <textarea {...register('note')} className='resize-none bg-transparent outline-none border-2 border-green-900 hover:border-green-700 focus:border-green-700 rounded-md w-full mt-3 h-20 text-light-2 placeholder:text-light-3 p-2' placeholder='Note...'/>
           {variant === 'CREATE' ? (
             <div className='mt-6 flex items-center justify-between w-full'>

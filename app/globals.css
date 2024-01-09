@@ -124,6 +124,7 @@
         hover:border-green-700
         focus:border-green-700
         rounded-md
+        capitalize
     }
 
     .exercise-form-option {
