@@ -58,7 +58,7 @@ const MeasuresPageAux: React.FC<MeasuresPageAuxProps> = ({
       </div>
 
       {!isCreateActive ? (
-        <Measures measureId={measureValue} newMeasureTxt={newMeasureTxt} />
+        <Measures userId={userId} measureId={measureValue} newMeasureTxt={newMeasureTxt} />
       ) : (
         <CreateMeasure userId={userId} />
       )}

@@ -27,7 +27,6 @@ const CreateExercise: React.FC<CreateExerciseProps> = ({
   isEditOpen,
   handleComplete
 }) => {
-  const router = useRouter()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [error, setError] = useState<string>('')
 

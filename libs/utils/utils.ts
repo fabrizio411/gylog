@@ -2,8 +2,40 @@ import { TypeExerciseCategory, TypeToMeasure, TypeUnits } from './types'
 
 export const formatDate = (date: string) => {
     const newDate = new Date(date)
-    
-    return `${newDate.getDate()}/${newDate.getMonth() + 1}/${newDate.getFullYear()}`
+
+    const formatMonth = (dateMonth: number) => {
+        if (dateMonth === 1) return 'Jan'
+        if (dateMonth === 2) return 'Feb'
+        if (dateMonth === 3) return 'Mar'
+        if (dateMonth === 4) return 'Apr'
+        if (dateMonth === 5) return 'May'
+        if (dateMonth === 6) return 'Jun'
+        if (dateMonth === 7) return 'Jul'
+        if (dateMonth === 8) return 'Aug'
+        if (dateMonth === 9) return 'Sep'
+        if (dateMonth === 10) return 'Oct'
+        if (dateMonth === 11) return 'Nov'
+        if (dateMonth === 12) return 'Dec'
+    }
+
+    return `${formatMonth(newDate.getMonth() + 1)} ${newDate.getDate()}, ${newDate.getFullYear()}`
+}
+
+export const formatInputDate = (date?: string) => {
+    let newDate = new Date()
+    if (date) {
+        newDate = new Date(date)
+    }
+
+    const formatNumber = (dateValue: number) => {
+        if ((dateValue) < 10) {
+            return `0${dateValue}`
+        }
+
+        return `${dateValue}`
+    }
+
+    return `${newDate.getFullYear()}-${formatNumber(newDate.getMonth() + 1)}-${formatNumber(newDate.getDate())}`
 }
 
 export const getParam = (param: string) => {
