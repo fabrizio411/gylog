@@ -35,18 +35,13 @@ export async function DELETE(
 
 export async function PUT(
     req: Request,
-    { params }: {
-        params: { id: string }
-    }
 ) {
     const {
         value,
-        unit,
         date,
         userId
     }: {
         value: number,
-        unit: TypeUnits,
         date: Date | string,
         userId: string
     } = await req.json()
@@ -54,11 +49,12 @@ export async function PUT(
     try {
         connectDB()
 
+        const id = req.url.slice(req.url.lastIndexOf('/') + 1)
+
         const updatedMeasureRecord = await Measurerecord.findByIdAndUpdate(
-            params.id,
+            id,
             {
                 value,
-                unit,
                 date,
             }
         ).where({ user: userId })

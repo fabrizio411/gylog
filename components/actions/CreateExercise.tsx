@@ -5,7 +5,6 @@ import axios from 'axios'
 import { useState } from 'react'
 import { useForm, FieldValues, SubmitHandler } from 'react-hook-form'
 import ModalLayout from '../others/ModalLayout'
-import { useRouter } from 'next/navigation'
 import { TypeExercise } from '@/libs/utils/types'
 
 type Variant = 'CREATE' | 'EDIT'

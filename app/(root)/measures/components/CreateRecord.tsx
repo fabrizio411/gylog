@@ -53,8 +53,25 @@ const CreateRecord: React.FC<CreateRecordProps> = ({
         unit: measure.useUnit
       })
       .catch((err) => {
-        console.log('Create exercise error', err)
-        setError('Error creating exercise')
+        console.log('Create record error', err)
+        setError('Error creating record')
+      })
+
+      if (res.data?.error) {
+        setError(res.data.message)
+      } else {
+        openHandler()
+        reset()
+        handleComplete()
+      }
+    } else if (variant === 'EDIT' && record) {
+      const res: any = await axios.put(`/api/measures/records/${record._id}`, {
+        ...data,
+        userId: userId
+      })
+      .catch((err) => {
+        console.log('Error editing record')
+        setError('Error editing record')
       })
 
       if (res.data?.error) {
