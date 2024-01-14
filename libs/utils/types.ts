@@ -133,6 +133,6 @@ export type TypeMeasureRecord = {
     measure: string | TypeMeasure,
     value: number,
     unit: TypeUnits,
-    date: Date,
+    date: string,
     user: string | TypeUserGeneral | TypeUser,
 }

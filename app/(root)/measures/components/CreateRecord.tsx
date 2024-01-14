@@ -45,8 +45,6 @@ const CreateRecord: React.FC<CreateRecordProps> = ({
   }
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-
-    console.log(data)
     if (variant === 'CREATE' && measure) {
       const res: any = await axios.post('/api/measures/records', {
         ...data,
@@ -69,6 +67,17 @@ const CreateRecord: React.FC<CreateRecordProps> = ({
     }
   }
 
+  // Handle delete
+  const handleDelete = () => {
+    if (variant === 'EDIT' && record) {
+      axios.delete(`/api/measures/records/${record._id}`)
+      .catch((err) => console.log(err))
+
+      openHandler()
+      handleComplete()
+    }
+  }
+
   return (
     <ModalLayout isOpen={isOpen} handleOpen={openHandler}>
       <form onSubmit={handleSubmit(onSubmit)} className='modal-content flex flex-col items-center w-10/12 sm:w-96'>
@@ -76,7 +85,6 @@ const CreateRecord: React.FC<CreateRecordProps> = ({
           {measure ? (
             <h3 className='text-light-1 font-semibold text-xl capitalize'>{measure?.name}</h3> 
           ) : null}
-          {/* <p className='text-lg font-bold text-green-900 hover:text-green-700 cursor-pointer'>13/11/2023</p> */}
           <input {...register('date')} type='date' className='outline-none bg-transparent text-lg font-bold text-green-900 hover:text-green-700 cursor-pointer' />
         </div>
         {error ? (
@@ -92,6 +100,9 @@ const CreateRecord: React.FC<CreateRecordProps> = ({
         
         <div className='flex gap-3 w-full mt-8'>
           <div onClick={handleCancel} className='flex-1 button bg-dark-border hover:bg-light-3'>Cancel</div>
+          {variant === 'EDIT' ? (
+            <button onClick={handleDelete} className='flex-1 button bg-red-900 hover:bg-red-700'>Delete</button>
+          ) : null}
           <button className='flex-1 button'>Save</button>
         </div>
       </form>

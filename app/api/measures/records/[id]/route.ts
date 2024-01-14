@@ -5,14 +5,14 @@ import Measure from '@/libs/models/measure.model'
 import { TypeUnits } from '@/libs/utils/types'
 
 export async function DELETE(
-    { params }: {
-        params: { id: string }
-    }
+    req: Request
 ) {
     try {
         connectDB()
 
-        const deletedMeasureRecord = await Measurerecord.findByIdAndDelete(params.id)
+        const id = req.url.slice(req.url.lastIndexOf('/') + 1)
+
+        const deletedMeasureRecord = await Measurerecord.findByIdAndDelete(id)
 
         if (!deletedMeasureRecord) {
             return NextResponse.json({ message: 'Error deleting measure', error: true })

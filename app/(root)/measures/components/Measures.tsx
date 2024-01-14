@@ -59,7 +59,7 @@ const Measures: React.FC<MeasuresProps> = ({
       <div className='w-full bg-dark-2 pl-3 pr-3 rounded-lg border border-dark-border'>
         {measure && measure.records.length && measure.records.length > 0 ? (
           measure.records.map((item: any, i) => (
-            <MeasureRecordCard key={i} date={item.date} value={item.value} unit={item.unit}  />
+            <MeasureRecordCard key={i} record={item} userId={userId} measure={measure} handleComplete={handleComplete} />
           ))
         ) : (
           <div className='p-4 flex flex-col items-center'>
@@ -74,7 +74,7 @@ const Measures: React.FC<MeasuresProps> = ({
 
       <CreateRecord
         variant='CREATE'
-        userId={userId} 
+        userId={userId}
         openHandler={openHandler}
         isOpen={isOpen}
         handleComplete={handleComplete}
