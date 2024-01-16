@@ -20,10 +20,6 @@ const Measures: React.FC<MeasuresProps> = ({
   const [measure, setMeasure] = useState<TypeMeasure>()
   const [isCreated, setIsCreated] = useState<boolean>(false)
 
-  if (measureId === newMeasureTxt) {
-    return null
-  }
-
   useEffect(() => {
     async function getMeasure() {
       const res: any = await axios.get(`/api/measures/${measureId}`)
@@ -32,7 +28,10 @@ const Measures: React.FC<MeasuresProps> = ({
       setMeasure(res.data)
     }
 
-    getMeasure()
+    if (measureId !== newMeasureTxt) {
+      getMeasure()
+    }
+
   }, [measureId, isCreated])
 
   // Handle create record

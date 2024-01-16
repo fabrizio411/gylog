@@ -8,11 +8,13 @@ import { useEffect, useState } from 'react'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 
 interface CreateMeasureProps {
-  userId: string
+  userId: string,
+  redirectMeasure: (id: string) => void
 }
 
 const CreateMeasure: React.FC<CreateMeasureProps> = ({
-  userId
+  userId,
+  redirectMeasure
 }) => {
   const [error, setError ] = useState<string>('')
   const [units, setUnits] = useState<TypeUnits[]>([])
@@ -41,7 +43,7 @@ const CreateMeasure: React.FC<CreateMeasureProps> = ({
     if (res.data?.error) {
       setError(res.data.message)
     } else {
-      // Hacer que redireccion a esa measure creada
+      redirectMeasure(res.data.id)
     }
   }
 

@@ -58,7 +58,7 @@ export async function POST(req: Request) {
             }
         )
 
-        return NextResponse.json({ message: 'Measure created' })
+        return NextResponse.json({ message: 'Measure created', id: newMeasure._id })
         
     } catch (error) {
         console.log('CREATE_MEASURES_ERROR', error)

@@ -14,6 +14,14 @@ interface MeasuresPageAuxProps {
 const MeasuresPageAux: React.FC<MeasuresPageAuxProps> = ({
   userId
 }) => {
+  const { register, watch, setValue } = useForm()
+  const measureValue = watch('measure')
+
+  // Handle redirect on create
+  const redirectMeasure = (newMeasureId: string) => {
+    setValue('measure', newMeasureId)
+  }
+
   // Get measures
   const [measures, setMeasures] = useState<TypeMeasure[]>([])
 
@@ -29,9 +37,6 @@ const MeasuresPageAux: React.FC<MeasuresPageAuxProps> = ({
   }, [])
 
   // Handle create measure
-  const { register, watch } = useForm()
-  const measureValue = watch('measure')
-
   const [isCreateActive, setIsCreateActive] = useState<boolean>(true)
   const newMeasureTxt = '+ New Measure'
 
@@ -60,7 +65,7 @@ const MeasuresPageAux: React.FC<MeasuresPageAuxProps> = ({
       {!isCreateActive ? (
         <Measures userId={userId} measureId={measureValue} newMeasureTxt={newMeasureTxt} />
       ) : (
-        <CreateMeasure userId={userId} />
+        <CreateMeasure userId={userId} redirectMeasure={redirectMeasure} />
       )}
     </div>
   )

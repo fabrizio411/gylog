@@ -18,7 +18,7 @@ export const formatDate = (date: string) => {
         if (dateMonth === 12) return 'Dec'
     }
 
-    return `${formatMonth(newDate.getMonth() + 1)} ${newDate.getDate()}, ${newDate.getFullYear()}`
+    return `${formatMonth(newDate.getMonth() + 1)} ${newDate.getUTCDate()}, ${newDate.getFullYear()}`
 }
 
 export const formatInputDate = (date?: string) => {

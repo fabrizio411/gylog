@@ -2,7 +2,7 @@
 
 ## TODO
 - Problemas para ir para atras en rutas dinamicas
-- Hacer que al crear measure te refdreccione a la measure creada
+- Measures, no se puede cambiar y volcer a la parte de create
 
 ## FALTA
 - Funciones para estructurar datos para las graficas.
