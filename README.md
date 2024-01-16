@@ -174,7 +174,7 @@ type Rutina = {
             note?: string
         }
     ],
-    file: string // file Id
+    file?: string // file Id
     user?: string,
     createdAt: string
 }

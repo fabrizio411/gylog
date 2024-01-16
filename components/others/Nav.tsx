@@ -16,7 +16,7 @@ const Nav = () => {
   const mainPages = ['/routines', '/', '/measures', '/profile']
 
   return (
-    <nav className='flex z-50 justify-around items-center h-16 w-full sm:w-[700px]'>
+    <nav className='fixed top-0 bg-dark-1 flex z-50 justify-around items-center h-16 w-full sm:w-[700px]'>
       {!mainPages.includes(pathname) ? (
         <div className='nav-item hidden sm:flex' onClick={() => router.back()}>
           <BackArrow className='scale-150' />
