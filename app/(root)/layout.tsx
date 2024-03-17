@@ -3,7 +3,6 @@ import '../globals.css'
 import Nav from '@/components/others/Nav'
 import Link from 'next/link'
 import MobileHeader from '@/components/others/MobileHeader'
-import getUser from '@/libs/utils/getUser'
 
 export const metadata: Metadata = {
   title: 'GYLOG',

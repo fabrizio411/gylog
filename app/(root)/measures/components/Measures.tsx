@@ -22,17 +22,18 @@ const Measures: React.FC<MeasuresProps> = ({
 
   useEffect(() => {
     async function getMeasure() {
+      if (measureId !== newMeasureTxt) {
+        return
+      }
       const res: any = await axios.get(`/api/measures/${measureId}`)
       .catch((err) => console.log(err))
 
       setMeasure(res.data)
     }
 
-    if (measureId !== newMeasureTxt) {
-      getMeasure()
-    }
+    getMeasure()
 
-  }, [measureId, isCreated])
+  }, [measureId, newMeasureTxt, isCreated])
 
   // Handle create record
   const [isOpen, setIsOpen] = useState<boolean>(false)
