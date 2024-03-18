@@ -8,6 +8,7 @@ const RoutinesCreatePage = async () => {
 
   return (
     <main className='main-container'>
+      <h1>Holaaa</h1>
       <CreatePageAux userId={user._id.toString()} />
     </main>
   )

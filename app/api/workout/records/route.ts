@@ -9,6 +9,10 @@ export async function GET() {
         connectDB()
 
         const user: Partial<TypeUser> = await getUser()
+        
+        if (!user) {
+            return NextResponse.json({ message: 'Error getting User', error: true })
+        }
 
         const workouts = Workout.find({ user: user._id })
 

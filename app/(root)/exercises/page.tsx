@@ -8,6 +8,8 @@ import ExercisesPageAux from './components/ExercisesPageAux'
 const ExercisesPage = async () => {
   const user = await getUser()
 
+  if (!user) return null
+
   return (
     <main className='main-container flex flex-col'>
       <ExercisesPageAux userId={user._id.toString()} />
