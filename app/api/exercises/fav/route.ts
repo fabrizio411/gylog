@@ -9,6 +9,10 @@ export async function GET() {
         
         const user = await getUser()
 
+        if (!user) {
+            return NextResponse.json({ message: 'Error getting User', error: true })
+        }
+
         // Obtener los ejercicios favoritos del usuario
         const favExercises = Exercise.find({ favouriteBy: user._id })
 
